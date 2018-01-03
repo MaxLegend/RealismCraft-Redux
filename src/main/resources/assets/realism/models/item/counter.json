@@ -1,0 +1,39 @@
+{
+	"__comment": "Designed by Pavel Durov with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"texturebody": "realism:items/counter/bodycounter",
+		"particle": "realism:items/e_particle",
+		"texture": "realism:items/counter/blacksolid",
+		"texture1": "realism:items/counter/hand"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 5.5, 6.4998, 3.4997 ],
+			"to": [ 12, 15.4998, 4.4997 ],
+			"rotation": { "origin": [ 6, 7, 4 ], "axis": "x", "angle": -22.5 },
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#texturebody" },
+				"up": { "uv": [ 16, 16, 0, 0 ], "texture": "#texturebody" },
+				"north": { "uv": [ 16, 16, 0, 0 ], "texture": "#texturebody" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texturebody" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#texturebody", "rotation": 90 },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#texturebody", "rotation": 270 }
+			}
+		},
+		{
+			"__comment": "Cube12",
+			"from": [ 6, 7, 4 ],
+			"to": [ 11.5, 15, 4.6 ],
+			"rotation": { "origin": [ 6, 7, 4 ], "axis": "x", "angle": -22.5 },
+			"faces": {
+				"down": { "uv": [ 6, 12.4, 11.5, 13 ], "texture": "#texture" },
+				"up": { "uv": [ 6, 3, 11.5, 3.6 ], "texture": "#texture" },
+				"north": { "uv": [ 4.5, 1, 10, 9 ], "texture": "#texture" },
+				"south": { "uv": [ 6, 1, 11.5, 9 ], "texture": "#texture" },
+				"west": { "uv": [ 3, 1, 3.6, 9 ], "texture": "#texture" },
+				"east": { "uv": [ 12.4, 1, 13, 9 ], "texture": "#texture" }
+			}
+		}
+	]
+}

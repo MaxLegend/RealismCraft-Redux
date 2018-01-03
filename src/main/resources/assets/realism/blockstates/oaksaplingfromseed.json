@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "age=0": { "model": "realism:oakseed_stage0" },
+    "age=1": { "model": "realism:oakseed_stage1" },
+    "age=2": { "model": "realism:oakseed_stage2" },
+    "age=3": { "model": "realism:oakseed_stage3" },
+    "age=4": { "model": "realism:oakseed_stage4" },
+    "age=5": { "model": "realism:oakseed_stage4" },
+    "age=6": { "model": "realism:oakseed_stage4" },
+    "age=6": { "model": "realism:oakseed_stage4" },
+  }
+}

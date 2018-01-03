@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "axis=y":  { "model": "realism:blockdeadtree" },
+        "axis=z":   { "model": "realism:blockdeadtree", "x": 90 },
+        "axis=x":   { "model": "realism:blockdeadtree", "x": 90, "y": 90 },
+        "axis=none": { "model": "realism:blockdeadtree" }
+    }
+}

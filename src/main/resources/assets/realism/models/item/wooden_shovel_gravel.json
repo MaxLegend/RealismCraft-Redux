@@ -1,0 +1,7 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "items/wood_shovel",
+        "layer1": "realism:items/shovel_content/gravel"
+    }
+}

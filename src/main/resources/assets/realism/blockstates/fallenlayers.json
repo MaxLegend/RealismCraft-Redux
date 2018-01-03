@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "layers=1":  { "model": "realism:fallen1" },
+        "layers=2":  { "model": "realism:fallen2" },
+        "layers=3":  { "model": "realism:fallen3" },
+        "layers=4":  { "model": "realism:fallen4" },
+        "layers=5":  { "model": "realism:fallen5" },
+        "layers=6":  { "model": "realism:fallen6" },
+        "layers=7":  { "model": "realism:fallen7" },
+        "layers=8":  { "model": "realism:blockfallen" }
+    }
+}

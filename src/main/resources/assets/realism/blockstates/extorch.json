@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=up": { "model": "realism:extorch" },
+        "facing=east": { "model": "realism:extorch_wall", "y": 270 },
+        "facing=south": { "model": "realism:extorch_wall", "y": 0 },
+        "facing=west": { "model": "realism:extorch_wall", "y": 90 },
+        "facing=north": { "model": "realism:extorch_wall", "y": 180 }
+    }
+}

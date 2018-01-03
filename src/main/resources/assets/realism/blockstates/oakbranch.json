@@ -1,0 +1,25 @@
+{
+    "multipart": [
+        {   "when": { "default": "true" },
+            "apply": { "model": "realism:branchoakcenter" }
+        },
+     	{   "when": { "down": "true" },
+            "apply": { "model": "realism:branchoakdown", "uvlock": true }
+        },
+     	{   "when": { "up": "true" },
+            "apply": { "model": "realism:branchoakup", "uvlock": true }
+        },
+        {   "when": { "north": "true" },
+            "apply": { "model": "realism:branchoaknorth", "uvlock": true }
+        },
+        {   "when": { "east": "true" },
+            "apply": { "model": "realism:branchoakeast", "uvlock": true }
+        },
+        {   "when": { "south": "true" },
+            "apply": { "model": "realism:branchoaksouth","uvlock": true }
+        },
+        {   "when": { "west": "true" },
+            "apply": { "model": "realism:branchoakwest", "uvlock": true }
+        }
+    ]
+}

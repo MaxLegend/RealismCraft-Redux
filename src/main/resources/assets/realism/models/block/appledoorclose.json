@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Pavel Durov with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "realism:blocks/e_particle",
+		"texture": "realism:blocks/e_texture"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 0, 0, 6.5 ],
+			"to": [ 16, 32, 9.5 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 3, 16 ], "texture": "#texture", "rotation": 90 },
+				"up": { "uv": [ 0, 0, 3, 16 ], "texture": "#texture", "rotation": 270 },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 13, 0, 16, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 0, 0, 3, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

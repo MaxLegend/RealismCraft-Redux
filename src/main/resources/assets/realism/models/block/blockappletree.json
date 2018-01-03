@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "realism:blocks/appletop",
+        "side": "realism:blocks/appleside"
+    }
+}

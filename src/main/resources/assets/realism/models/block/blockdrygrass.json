@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "blocks/dirt",
+        "down": "blocks/dirt",
+        "up": "realism:blocks/blockdrygrass_top",
+        "north": "realism:blocks/blockdrygrass_side",
+        "east": "realism:blocks/blockdrygrass_side",
+        "south": "realism:blocks/blockdrygrass_side",
+        "west": "realism:blocks/blockdrygrass_side"
+    }
+}

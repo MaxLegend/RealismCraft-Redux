@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=east,open=false":  { "model": "realism:appledoorclose", "y": 90  },
+        "facing=west,open=false":   { "model": "realism:appledoorclose", "y": 90 },
+        "facing=south,open=false":   { "model": "realism:appledoorclose", "z": 90},
+        "facing=north,open=false": { "model": "realism:appledoorclose"},
+        "facing=east,open=true":  { "model": "realism:appledooropen", "y": 90  },
+        "facing=west,open=true":   { "model": "realism:appledooropen", "y": 90 },
+        "facing=south,open=true":   { "model": "realism:appledooropen", "z": 90},
+        "facing=north,open=true": { "model": "realism:appledooropen"}
+    }
+}

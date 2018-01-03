@@ -1,0 +1,23 @@
+
+itemGroup.tabMain=Realism Mod
+tile.growtreeone.name=Oak Tree
+tile.growtreetwo.name=Oak Tree
+item.handfuldirt.name=Handful dirt
+item.stonehand.name=Stone
+item.turf.name=Grass
+item.pointedstone.name=PointedStone
+tile.cupmfire.name=Campfire
+tile.smallleaves.name=Oak Leaves
+item.clumpclay.name=Lump clay
+tile.wetvine.name=Wet Vine
+tile.dryvine.name=Dry Vine
+item.wetvineitem.name=Wet Vine
+item.dryvineitem.name=Dry Vine
+tile.mossblock.name=Moss
+item.fullstoneshovel.name=Filled Stone Shovel
+item.fullwoodshovel.name=Filled Wooden Shovel
+item.fullironshovel.name=Filled Iron Shovel
+item.fullgoldshovel.name=Filled Golden Shovel
+item.fulldiamondshovel.name=Filled Diamond Shovel
+item.spoke.name=Spoke
+item.spokes.name=Spokes

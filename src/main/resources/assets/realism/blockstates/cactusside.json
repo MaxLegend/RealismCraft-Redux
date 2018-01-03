@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east":  { "model": "realism:cactusside", "y": 90  },
+        "facing=west":   { "model": "realism:cactusside", "y": 270 },
+        "facing=south":   { "model": "realism:cactusside", "x": 180, "y": 0},
+        "facing=north": { "model": "realism:cactusside"}
+    }
+}
