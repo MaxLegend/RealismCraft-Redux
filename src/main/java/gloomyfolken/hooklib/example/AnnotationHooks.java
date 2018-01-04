@@ -47,6 +47,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.gen.feature.WorldGenCactus;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import ru.legendgamer.Realism.RealismCore.RegBlocks;
 public class AnnotationHooks {
 
 	public static final AxisAlignedBB NULL_AABB = null;
@@ -280,7 +281,15 @@ public class AnnotationHooks {
 					Block.spawnAsEntity(world, pos, new ItemStack(RegItems.sprucesapling));
 				}
 			}
-	}*/
+	}
+	
+		@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
+	public static void onBlockAdded(BlockLeaves bl,World world, BlockPos pos, IBlockState state) {
+		world.scheduleBlockUpdate(pos, Blocks.LEAVES, 1, 0);
+		world.scheduleBlockUpdate(pos, Blocks.LEAVES2, 1, 0);
+	}
+	*
+	*/
 
 	@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
 	public static void onEntityCollidedWithBlock(BlockLeaves bl,World world, BlockPos pos, IBlockState state, Entity entity) {
@@ -293,11 +302,7 @@ public class AnnotationHooks {
 	{
 	}
 	
-	@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
-	public static void onBlockAdded(BlockLeaves bl,World world, BlockPos pos, IBlockState state) {
-		world.scheduleBlockUpdate(pos, Blocks.LEAVES, 1, 0);
-		world.scheduleBlockUpdate(pos, Blocks.LEAVES2, 1, 0);
-	}
+
 	private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Block>, IBlockColor> blockColorMap = com.google.common.collect.Maps.newHashMap();
 
 	
@@ -348,15 +353,15 @@ public class AnnotationHooks {
 	        }, Blocks.GRASS);
 	        
 	        //блоки хук окраска пиздатая
-	 /*       blockcolors.registerBlockColorHandler(new IBlockColor()
+	        blockcolors.registerBlockColorHandler(new IBlockColor()
 	        {
 	            public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex)
 	            {
 	            
 	                return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
 	            }
-	        }, RegBlocks.leavesappletree,RegBlocks.fallenlayers);
-	        */
+	        }, RegBlocks.leavesappletree,RegBlocks.fallenlayers,RegBlocks.smallleaves,RegBlocks.smallleavesappletree,RegBlocks.smallleavesbirch,RegBlocks.smallleavesspruce,RegBlocks.mossblock);
+	        
 
 	        blockcolors.registerBlockColorHandler(new IBlockColor()
 	        {

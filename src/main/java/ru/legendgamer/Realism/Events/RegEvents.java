@@ -3,6 +3,8 @@ package ru.legendgamer.Realism.Events;
 import net.minecraftforge.common.MinecraftForge;
 import ru.legendgamer.Realism.Events.WaterBarEvent.EventDrinkBar;
 import ru.legendgamer.Realism.Events.WaterBarEvent.PlayerCAPEventHandler;
+import ru.legendgamer.Realism.NewInventory.CAPforINV.reg.CancelVanillaInv;
+import ru.legendgamer.Realism.RealismCore.Particle.ParticleEvent;
 
 public class RegEvents {
 	public static class Server
@@ -16,6 +18,8 @@ public class RegEvents {
 	{
 		public Client()
 		{
+			register(new ParticleEvent());
+			register(new CancelVanillaInv());
 			register(new EventDrinkBar());
 		}
 	}

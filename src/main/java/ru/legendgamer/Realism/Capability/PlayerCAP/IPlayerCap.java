@@ -1,4 +1,4 @@
-package ru.legendgamer.Realism.Capability.WaterCAP;
+package ru.legendgamer.Realism.Capability.PlayerCAP;
 
 import java.util.List;
 /*
