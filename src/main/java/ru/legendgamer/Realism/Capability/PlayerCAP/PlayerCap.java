@@ -9,10 +9,12 @@ public class PlayerCap  implements IPlayerCap{
 	//It was all in one place to write and equated to 100, but I like it more
 	public float tempBody = 36.6F;
 	public final float maxTempBody = 42F;
-	
+
 	public boolean isCold;
 	public boolean isGrippe;
-	
+
+	public float playerWeight = 70F;
+	public float maxPlayerWeight = 180;
 	public int waterLevel = 100;
 	public final int maxlevel = 100;
 
@@ -59,22 +61,22 @@ public class PlayerCap  implements IPlayerCap{
 	public void copyCapabilities(IPlayerCap level) {
 		waterLevel = level.getWaterLevel();
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void addTempBody(float temp) {
 		float line = tempBody + temp;
 		if(line <= maxTempBody) tempBody = line;
 		else tempBody = maxTempBody;	
-		
+
 	}
 	@Override
 	public void reduceTempBody(float temp) {
 		float line = tempBody - temp; 
 		if(line >= 0) tempBody = line;
 		else tempBody = 0;
-		
+
 	}
 	@Override
 	public float getTempBody() {
@@ -100,6 +102,31 @@ public class PlayerCap  implements IPlayerCap{
 	@Override
 	public void setGrippe(boolean grippe) {
 		isGrippe = grippe; 
+	}
+	
+	
+	@Override
+	public void addWeight(float weight) {
+		float add = playerWeight + weight;
+		if(add <= 0)return;
+		if(weight > 0 && weight <= maxPlayerWeight)
+			playerWeight = add;
+	}
+	@Override
+	public void reduceWeight(float weight) {
+		float reduce = playerWeight - weight;
+		if(reduce <= 0)return;
+		if(weight > 0 && weight <= maxPlayerWeight) 
+			playerWeight = reduce;
+	}
+	@Override
+	public float getWeight() {
+		return playerWeight;
+	}
+	@Override
+	public void setWeight(float weight) {
+		if(weight > 0 && weight <= maxPlayerWeight)
+			playerWeight = weight;
 	}
 
 

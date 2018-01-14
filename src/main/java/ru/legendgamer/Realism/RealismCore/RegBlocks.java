@@ -144,7 +144,9 @@ public class RegBlocks {
 
 	public static Block fallenlayers = new FallenBlockLeaves(Material.LEAVES, "fallenlayers", 6F, 1, SoundType.WOOD);
 	
+
 	public static void register() {
+	
 		registerBlock(fallenlayers);
 	//	registerBlock(compactworkbench);
 		registerBlock(sprucebranch);
@@ -195,6 +197,8 @@ public class RegBlocks {
 		registerBlock(smallleavesspruce);
 	}
 	public static void registerRender() {
+	
+		
 		registerRenderBlock(fallenlayers);
 		registerRenderBlock(sprucebranch);
 //		registerRenderBlock(compactworkbench);

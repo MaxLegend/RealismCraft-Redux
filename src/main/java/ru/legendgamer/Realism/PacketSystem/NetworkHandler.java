@@ -6,8 +6,11 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import ru.legendgamer.Realism.PacketSystem.Packets.Client.HUDSyncMessage;
+import ru.legendgamer.Realism.PacketSystem.Packets.Client.MonthSyncMessage;
+import ru.legendgamer.Realism.PacketSystem.Packets.Client.PlayerWeightMessage;
 import ru.legendgamer.Realism.PacketSystem.Packets.Server.HUDSyncMessageServer;
 import ru.legendgamer.Realism.PacketSystem.Packets.Server.OpenInventoryMessage;
+import ru.legendgamer.Realism.PacketSystem.Packets.Server.PlayerWeightMessageServer;
 import ru.legendgamer.Realism.RealismCore.Realism;
 
 public class NetworkHandler {
@@ -21,6 +24,9 @@ public class NetworkHandler {
         network.registerMessage(HUDSyncMessage.Handler.class, HUDSyncMessage.class, 0, Side.CLIENT);
         network.registerMessage(HUDSyncMessageServer.Handler.class, HUDSyncMessageServer.class, 1, Side.SERVER);
         network.registerMessage(OpenInventoryMessage.Handler.class, OpenInventoryMessage.class, 2, Side.SERVER);
+        network.registerMessage(MonthSyncMessage.Handler.class, MonthSyncMessage.class, 3, Side.CLIENT);
+        network.registerMessage(PlayerWeightMessage.Handler.class, PlayerWeightMessage.class, 4, Side.CLIENT);
+        network.registerMessage(PlayerWeightMessageServer.Handler.class, PlayerWeightMessageServer.class, 5, Side.SERVER);
     }
 
 

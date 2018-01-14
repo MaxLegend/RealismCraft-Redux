@@ -8,34 +8,35 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapProvider;
+import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
+import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
 
+public class PlayerWeightMessage implements IMessage {  
+	public float value;  
+	public PlayerWeightMessage(){}
 
-public class HUDSyncMessage implements IMessage {  
-	public int value;  
-	public HUDSyncMessage(){}
-
-	public HUDSyncMessage(int value){  
+	public PlayerWeightMessage(float value){  
 		this.value = value;   
 	} 
 	@Override
 	public void fromBytes(ByteBuf buf) {  
-		value = buf.readInt();   
+		value = buf.readFloat();   
 	}  
 	@Override 
 	public void toBytes(ByteBuf buf) {   
-		buf.writeInt(value); 
+		buf.writeFloat(value); 
 	}   
 
-	public static class Handler implements IMessageHandler<HUDSyncMessage, IMessage> {
+	public static class Handler implements IMessageHandler<PlayerWeightMessage, IMessage> {
 
 		@Override
-		public IMessage onMessage(HUDSyncMessage message, MessageContext ctx) { 
+		public IMessage onMessage(PlayerWeightMessage message, MessageContext ctx) { 
 
 			EntityPlayerSP player = Minecraft.getMinecraft().player;   
 			if(player != null) {
-				IPlayerCap cap = player.getCapability(PlayerCapProvider.LEVEL_CAP, null);   
+				IPlayerCap cap = player.getCapability(PlayerCapProvider.LEVEL_CAP, null);	
 				if(cap != null)    {
-					cap.setWaterLevel(message.value);  
+					cap.setWeight(message.value);  
 				}
 			}
 				return null;    

@@ -20,6 +20,7 @@ import ru.legendgamer.Realism.RealismCore.Items.Kaolin;
 import ru.legendgamer.Realism.RealismCore.Items.PointedStone;
 import ru.legendgamer.Realism.RealismCore.Items.Rope;
 import ru.legendgamer.Realism.RealismCore.Items.Stonehand;
+import ru.legendgamer.Realism.RealismCore.Items.Thermometr;
 import ru.legendgamer.Realism.RealismCore.Items.WetVineItem;
 
 public class RegItems {
@@ -97,7 +98,7 @@ public class RegItems {
 //	public static Item birchsapling = new BirchSapling("birchsapling",64);
 //	public static Item sprucesapling = new SpruceSapling("sprucesapling",64);
 	
-	public static Item thermo = new BasicItem("thermo",1);
+	public static Item thermo = new Thermometr("thermo",1);
 	
 	public static Item oreitemiron = new BasicItem("oreitemiron",64),
 			   oreitemgold = new BasicItem("oreitemgold",64),
@@ -114,13 +115,15 @@ public class RegItems {
 	public static Item wood_pickaxe_handle = new BasicItem("wood_pickaxe_hancdle", 1);
 	
 	public static Item counter = new Counter("counter",1);
+	public static Item calendar = new BasicItem("calendar",1);
 
-
-//	public static Item backpack = new ItemBackpack("backpack",1);
+	public static Item backpack = new BasicItem("backpack",1);
 	
 	public static Item itemfallen = new ItemFallenLeaves("itemfallen");
 
 	public static void register() {
+		registerItem(calendar);
+		
 		// MP's register
 //		registerItem(appleseed);
 		registerItem(itemfallen);
@@ -130,7 +133,7 @@ public class RegItems {
 		registerItem(wood_pickaxe);
 		registerItem(wood_pickaxe_handle);
 		
-//		registerItem(backpack);
+		registerItem(backpack);
 		registerItem(thermo);
 		
 		registerItem(counter);
@@ -191,9 +194,11 @@ public class RegItems {
 
 	}
 	public static void registerRender() {
+		registerRenderItem(calendar);
+		
 		registerRenderItem(itemfallen);
 		registerRenderItem(thermo);
-	//	registerRenderItem(backpack);
+		registerRenderItem(backpack);
 		registerRenderItem(counter);
 		registerRenderItem(cookedplayermeat);
 		registerRenderItem(playermeat);

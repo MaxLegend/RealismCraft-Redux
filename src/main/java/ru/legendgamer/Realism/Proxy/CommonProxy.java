@@ -12,6 +12,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapStorage;
+import ru.legendgamer.Realism.Capability.WorldCAP.DateStorage;
+import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
 import ru.legendgamer.Realism.Config.ConfigManager;
 import ru.legendgamer.Realism.Events.RegEvents;
 import ru.legendgamer.Realism.NewInventory.CAPforINV.CAPCustomInventory;
@@ -30,7 +32,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event)
     {
     	ConfigManager.register(event);
-    	
+    
     	RegBlocks.register();
     	RegItems.register();
     //	RegEntity.register();
@@ -38,6 +40,7 @@ public class CommonProxy {
     	new RegEvents.Server();
     	CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
     	CapabilityManager.INSTANCE.register(ICAPCustomInventory.class, new CAPCustomInventoryStorage(), CAPCustomInventory.class);
+    	 CapabilityManager.INSTANCE.register(IDate.class, DateStorage.INSTANCE, DateStorage.INSTANCE);
     	NetworkHandler.init();
     	
     }

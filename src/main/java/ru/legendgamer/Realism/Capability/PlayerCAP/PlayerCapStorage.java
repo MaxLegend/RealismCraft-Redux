@@ -10,24 +10,23 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
  * Thanks Thunder for the help
  */
 public class PlayerCapStorage implements IStorage<IPlayerCap> {
-
 	@Override
 	public NBTBase writeNBT(Capability<IPlayerCap> capability, IPlayerCap instance, EnumFacing side) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setInteger("waterlevel", instance.getWaterLevel());
 		properties.setFloat("tempBody", instance.getTempBody());
+		properties.setFloat("playerweight", instance.getWeight());
 		properties.setBoolean("cold", instance.getCommonCold());
 		properties.setBoolean("grippe", instance.getCommonCold());
 		return properties;
 	}
-	
 	@Override
 	public void readNBT(Capability<IPlayerCap> capability, IPlayerCap instance, EnumFacing side, NBTBase nbt) {	
 		NBTTagCompound properties = (NBTTagCompound)nbt;
 		instance.setWaterLevel(properties.getInteger("waterlevel"));
 		instance.setTempBody(properties.getFloat("tempBody"));
+		instance.setWeight(properties.getFloat("playerweight"));
 		instance.setCommonCold(properties.getBoolean("cold"));
 		instance.setCommonCold(properties.getBoolean("grippe"));
 	}
-	
 }

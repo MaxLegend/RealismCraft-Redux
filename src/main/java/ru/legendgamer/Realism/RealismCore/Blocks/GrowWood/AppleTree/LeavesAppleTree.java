@@ -66,11 +66,7 @@ public class LeavesAppleTree extends BasicBlockWithCustomModel{
 			if(!world.isAirBlock(pos.down())) {
 
 			}
-			if(world.isAirBlock(pos.down())) {
-				
-
-
-							
+			if(world.isAirBlock(pos.down())) {		
 					Realism.proxy.particleClient(world, pos, rand);
 			
 			}

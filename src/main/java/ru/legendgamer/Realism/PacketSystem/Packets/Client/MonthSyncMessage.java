@@ -6,36 +6,35 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
-import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapProvider;
+import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
+import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
 
+public class MonthSyncMessage implements IMessage {  
+	public byte value;  
+	public MonthSyncMessage(){}
 
-public class HUDSyncMessage implements IMessage {  
-	public int value;  
-	public HUDSyncMessage(){}
-
-	public HUDSyncMessage(int value){  
+	public MonthSyncMessage(byte value){  
 		this.value = value;   
 	} 
 	@Override
 	public void fromBytes(ByteBuf buf) {  
-		value = buf.readInt();   
+		value = buf.readByte();   
 	}  
 	@Override 
 	public void toBytes(ByteBuf buf) {   
-		buf.writeInt(value); 
+		buf.writeByte(value); 
 	}   
 
-	public static class Handler implements IMessageHandler<HUDSyncMessage, IMessage> {
+	public static class Handler implements IMessageHandler<MonthSyncMessage, IMessage> {
 
 		@Override
-		public IMessage onMessage(HUDSyncMessage message, MessageContext ctx) { 
+		public IMessage onMessage(MonthSyncMessage message, MessageContext ctx) { 
 
 			EntityPlayerSP player = Minecraft.getMinecraft().player;   
 			if(player != null) {
-				IPlayerCap cap = player.getCapability(PlayerCapProvider.LEVEL_CAP, null);   
+				IDate cap = player.getCapability(DateProvider.DATE, null);   
 				if(cap != null)    {
-					cap.setWaterLevel(message.value);  
+					cap.setMonth(message.value);  
 				}
 			}
 				return null;    

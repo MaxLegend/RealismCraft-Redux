@@ -11,7 +11,9 @@ public class ParticleEvent{
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent 
 	public void spriteRegisterEventPre(TextureStitchEvent.Pre event) {      
-		ResourceLocation leavespart = new ResourceLocation("realism:particles/leavespart");  
+		ResourceLocation leavespart = new ResourceLocation("realism:particles/leavespart"); 
+		
 		event.getMap().registerSprite(leavespart); 
+	
 		}
 	}

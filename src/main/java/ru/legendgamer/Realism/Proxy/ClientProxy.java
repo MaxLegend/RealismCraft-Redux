@@ -12,10 +12,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
+import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
 import ru.legendgamer.Realism.Events.EventToolMode;
+import ru.legendgamer.Realism.Events.HandAndNoItemEvent;
 import ru.legendgamer.Realism.Events.RegEvents;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
@@ -32,7 +36,9 @@ public class ClientProxy extends CommonProxy {
 		super.preInit(event);
 
 		RegItems.preRegisterRender();
+	
 		 ClientRegistry.registerKeyBinding(EventToolMode.KEY_TOOL_MODE);
+		 ClientRegistry.registerKeyBinding(HandAndNoItemEvent.keyDestroyOffhand);
 		new RegEvents.Client();
 	}
 
@@ -40,7 +46,8 @@ public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event)
 	{
 		super.init(event);
-		//	RegRenderLayer.register();
+//		RegRenderLayer.register();
+	
 		RegBlocks.registerRender();
 		RegItems.registerRender();
 		//SoundsRegister.register();
@@ -71,7 +78,11 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override 
 	public void particleClient(World world, BlockPos pos, Random rand) {
+		World serverWorld = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		IDate date = world.getCapability(DateProvider.DATE, null);
+		if(date.getMonth() == 8 || date.getMonth() == 9 ||date.getMonth() == 10 ) {
 		FallingLeaves newEffect = new FallingLeaves(world, pos.getX() + rand.nextFloat(), pos.getY(), pos.getZ()+ rand.nextFloat(), 0, 0, 0);
 		Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
+		}
 	}
 }

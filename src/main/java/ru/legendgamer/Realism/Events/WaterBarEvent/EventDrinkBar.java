@@ -28,7 +28,9 @@ public class EventDrinkBar {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
+		
+		int x = event.getResolution().getScaledWidth() / 2 + 10;
+		int y = event.getResolution().getScaledHeight() - 49;
 		mc.renderEngine.bindTexture(textureWater);
 		int left = event.getResolution().getScaledWidth() / 2 + 10;
 		int top = event.getResolution().getScaledHeight() - 49;

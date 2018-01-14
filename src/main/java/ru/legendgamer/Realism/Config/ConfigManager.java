@@ -1,10 +1,10 @@
 package ru.legendgamer.Realism.Config;
 
-import scala.Int;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import scala.Int;
 
 public class ConfigManager
 {
@@ -50,10 +50,28 @@ public class ConfigManager
    public static float pm2034;
    public static float spm2034;
 
+   //temp variables
+   public static int tempWinter;
+   public static int tempSpring;
+   public static int tempSummer;
+   public static int tempAutumn;
+   
+   public static int speedRemoveWeight;
 
+   public static int radiusRenderMold;
+   
    public static void register(FMLPreInitializationEvent e) {
        config = new Configuration(e.getSuggestedConfigurationFile());
        config.load();
+       radiusRenderMold = config.getInt("radiusRenderMold", "", 9,  3, 70, I18n.translateToLocal("config.radiusRenderMold"), "config.radiusRenderMold.name");
+       
+       speedRemoveWeight = config.getInt("speedRemoveWeight", "System Weight", 240,  120, 960, I18n.translateToLocal("config.speedRemoveWeight"), "config.speedRemoveWeight.name");
+       //они пока ничего не решают
+       tempWinter = config.getInt("tempWinter", "Seasons:Temperature", 12,  8, 20, I18n.translateToLocal("config.tempWinter"), "config.tempWinter.name");
+       tempSpring = config.getInt("tempSpring", "Seasons:Temperature", 12,  8, 20,  I18n.translateToLocal("config.tempSpring"), "config.tempSpring.name");
+       tempSummer = config.getInt("tempSummer", "Seasons:Temperature", 12,  8, 20, I18n.translateToLocal("config.tempSummer"), "config.tempSummer.name");
+       tempAutumn = config.getInt("tempAutumn", "Seasons:Temperature", 12,  8, 20, I18n.translateToLocal("config.tempAutumn"), "config.tempAutumn.name");
+     
        
        pm339 = config.getFloat("pm339", "System Weight", 1.05F,  1.0F,1.2F, "config.pm339", "config.pm339.name");
        spm339 = config.getFloat("spm339", "System Weight", 1.01F, 1.0F, 1.07F,  "config.spm339", "config.spm339.name");

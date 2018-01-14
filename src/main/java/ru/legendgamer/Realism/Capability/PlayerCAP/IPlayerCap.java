@@ -27,6 +27,11 @@ public interface IPlayerCap {
 	public int getTicker();
 	public void incrementTicker();
 	public void copyCapabilities(IPlayerCap indicator);
+	
+	public void addWeight(float weight);
+	public void reduceWeight(float weight);
+	public float getWeight();
+	public void setWeight(float weight);
 
 }
 

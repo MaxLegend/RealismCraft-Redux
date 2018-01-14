@@ -1,4 +1,4 @@
-package ru.legendgamer.Realism.Events.WaterBarEvent;
+package ru.legendgamer.Realism.Events.CAP;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -30,6 +30,7 @@ import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapProvider;
 import ru.legendgamer.Realism.PacketSystem.NetworkHandler;
 import ru.legendgamer.Realism.PacketSystem.Packets.Client.HUDSyncMessage;
+import ru.legendgamer.Realism.PacketSystem.Packets.Client.TemperatureBodyClientMessage;
 import ru.legendgamer.Realism.PacketSystem.Packets.Server.HUDSyncMessageServer;
 import ru.legendgamer.Realism.RealismCore.Realism;
 
@@ -166,5 +167,82 @@ public class PlayerCAPEventHandler {
 		Vec3d vec3d1 = vec3d.addVector((double)f6 * d3, (double)f5 * d3, (double)f7 * d3);
 		return worldIn.rayTraceBlocks(vec3d, vec3d1, useLiquids, !useLiquids, false);
 	}
+	
+	/**
+	 * температура игрока
+	 * 
+	 */
+	@SubscribeEvent
+	public void onSick(LivingUpdateEvent event) {
+		if(event.getEntity() instanceof EntityPlayer && !FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			IPlayerCap capabilities = player.getCapability(PlayerCapProvider.LEVEL_CAP, null);
+
+			if(player.ticksExisted % 80 == 0) {
+				Biome biome = player.getEntityWorld().getBiomeForCoordsBody(new BlockPos(player));
+
+				int variator = player.getEntityWorld().rand.nextInt(40);
+
+				if((biome == Biomes.TAIGA || biome == Biomes.COLD_TAIGA || biome == Biomes.COLD_TAIGA_HILLS || biome == Biomes.TAIGA_HILLS || biome == Biomes.COLD_BEACH)&& variator == 32){
+					capabilities.setTempBody(37.8F);
+					capabilities.setCommonCold(true);
+				}
+				if((biome == Biomes.TAIGA || biome == Biomes.COLD_TAIGA || biome == Biomes.COLD_TAIGA_HILLS || biome == Biomes.TAIGA_HILLS || biome == Biomes.COLD_BEACH)&& variator == 24){
+					capabilities.setTempBody(39.1F);
+					int intovariator = player.getEntityWorld().rand.nextInt(3);
+					if(intovariator == 2){
+						capabilities.setTempBody(38.8F);
+					}
+					if(intovariator == 1){
+						capabilities.setTempBody(38.6F);
+					}
+					if(intovariator == 0){
+						capabilities.setTempBody(38.9F);
+					}
+					capabilities.setGrippe(true);
+				}
+
+
+				if(variator == 34){
+					capabilities.setTempBody(36.6F);
+					int intovariator = player.getEntityWorld().rand.nextInt(3);
+					if(intovariator == 2){
+						capabilities.setTempBody(36.7F);
+					}
+					if(intovariator == 1){
+						capabilities.setTempBody(36.5F);
+					}
+					if(intovariator == 0){
+						capabilities.setTempBody(36.4F);
+					}
+					capabilities.setCommonCold(false);
+				}
+				if(variator == 13){
+					capabilities.setTempBody(36.6F);
+					int intovariator = player.getEntityWorld().rand.nextInt(3);
+					if(intovariator == 2){
+						capabilities.setTempBody(36.7F);
+					}
+					if(intovariator == 1){
+						capabilities.setTempBody(36.5F);
+					}
+					if(intovariator == 0){
+						capabilities.setTempBody(36.4F);
+					}
+					capabilities.setGrippe(false);
+				}
+
+				//System.out.println("pre b " + capabilities.getCommonCold());
+			//	System.out.println("pre " + capabilities.getTempBody());
+				NetworkHandler.network.sendTo(new TemperatureBodyClientMessage(capabilities.getTempBody()), (EntityPlayerMP)player);
+			//	NetworkHandler.network.sendTo(new ColdMessageClient(capabilities.getCommonCold()), (EntityPlayerMP)player);
+			//	System.out.println("post " + capabilities.getTempBody());
+			//	System.out.println("post b " + capabilities.getCommonCold());
+			}
+		}
+
+	}
+
 }
 
