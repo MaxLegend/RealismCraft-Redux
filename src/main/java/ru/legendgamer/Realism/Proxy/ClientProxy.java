@@ -19,11 +19,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
 import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
 import ru.legendgamer.Realism.Events.EventToolMode;
-import ru.legendgamer.Realism.Events.HandAndNoItemEvent;
 import ru.legendgamer.Realism.Events.RegEvents;
+import ru.legendgamer.Realism.Events.GameEvents.HandAndNoItemEvent;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
+import ru.legendgamer.Realism.RealismCore.RegFoods;
 import ru.legendgamer.Realism.RealismCore.RegItems;
+import ru.legendgamer.Realism.RealismCore.RegSounds;
 import ru.legendgamer.Realism.RealismCore.Particle.FallingLeaves;
 
 public class ClientProxy extends CommonProxy {
@@ -40,6 +42,8 @@ public class ClientProxy extends CommonProxy {
 		 ClientRegistry.registerKeyBinding(EventToolMode.KEY_TOOL_MODE);
 		 ClientRegistry.registerKeyBinding(HandAndNoItemEvent.keyDestroyOffhand);
 		new RegEvents.Client();
+
+		new RegSounds();
 	}
 
 	@Override
@@ -48,9 +52,11 @@ public class ClientProxy extends CommonProxy {
 		super.init(event);
 //		RegRenderLayer.register();
 	
-		RegBlocks.registerRender();
+		
 		RegItems.registerRender();
-		//SoundsRegister.register();
+		RegFoods.registerRender();
+		RegBlocks.registerRender();
+		
 	}
 
 	@Override
@@ -70,7 +76,7 @@ public class ClientProxy extends CommonProxy {
 				RegBlocks.smallleaves,
 				RegBlocks.smallleavesspruce, 
 				RegBlocks.fallenlayers,
-				//RegItems.itemfallen,
+			
 				RegBlocks.mossblock,
 				RegBlocks.smallleavesbirch,
 				RegBlocks.smallleavesappletree);
@@ -78,11 +84,11 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override 
 	public void particleClient(World world, BlockPos pos, Random rand) {
-		World serverWorld = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
-		IDate date = world.getCapability(DateProvider.DATE, null);
-		if(date.getMonth() == 8 || date.getMonth() == 9 ||date.getMonth() == 10 ) {
+	//	World serverWorld = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+	//	IDate date = world.getCapability(DateProvider.DATE, null);
+
 		FallingLeaves newEffect = new FallingLeaves(world, pos.getX() + rand.nextFloat(), pos.getY(), pos.getZ()+ rand.nextFloat(), 0, 0, 0);
 		Minecraft.getMinecraft().effectRenderer.addEffect(newEffect);
-		}
+	
 	}
 }

@@ -1,8 +1,10 @@
 {
     "variants": {
-        "facing=north": { "model": "realism:cumpfire" },
-        "facing=south": { "model": "realism:cumpfire", "y": 180 },
-        "facing=west":  { "model": "realism:cumpfire", "y": 270 },
-        "facing=east":  { "model": "realism:cumpfire", "y": 90 }
+        "withcoal=0": { "model": "realism:cumpfire" },
+        "withcoal=1": { "model": "realism:cumpfire_withcoal_0" },
+        "withcoal=2": { "model": "realism:cumpfire_withcoal_1" },
+        "withcoal=3": { "model": "realism:cumpfire_withcoal_2" },
+        "withcoal=4":  { "model": "realism:cumpfire_withcoal_3" },
+	"withcoal=5":  { "model": "realism:cumpfire_withcoal_4" }
     }
 }

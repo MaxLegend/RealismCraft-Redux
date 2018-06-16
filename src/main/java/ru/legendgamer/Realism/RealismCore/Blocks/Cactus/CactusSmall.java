@@ -16,9 +16,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithCustomModel;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockWithCustomModel;
 
 public class CactusSmall extends BasicBlockWithCustomModel{
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();
@@ -66,11 +66,7 @@ public class CactusSmall extends BasicBlockWithCustomModel{
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-	@Override
-    public boolean canPlaceBlockAt(World world, BlockPos pos)
-    {
-        return world.getBlockState(pos.down()).getBlock() == Blocks.SAND || world.getBlockState(pos.down()).getBlock() == RegBlocks.realismsand || world.getBlockState(pos.down()).getBlock() == RegBlocks.realismredsand;
-    }
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {

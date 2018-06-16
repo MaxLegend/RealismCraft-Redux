@@ -7,21 +7,20 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockWithDropItem;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithDropItem;
+import ru.legendgamer.Realism.API.BasicBlock.BasicFallingLog;
 import ru.legendgamer.Realism.RealismCore.Blocks.Ash;
 import ru.legendgamer.Realism.RealismCore.Blocks.BlockBurntGrass;
 import ru.legendgamer.Realism.RealismCore.Blocks.BlockBurntTree;
 import ru.legendgamer.Realism.RealismCore.Blocks.BlockDryGrass;
+import ru.legendgamer.Realism.RealismCore.Blocks.CumpfireBlock;
 import ru.legendgamer.Realism.RealismCore.Blocks.MossBlock;
 import ru.legendgamer.Realism.RealismCore.Blocks.PaneHorizontal;
-import ru.legendgamer.Realism.RealismCore.Blocks.RealismRedSand;
-import ru.legendgamer.Realism.RealismCore.Blocks.RealismSand;
 import ru.legendgamer.Realism.RealismCore.Blocks.TestGen;
-import ru.legendgamer.Realism.RealismCore.Blocks.WetRedSand;
-import ru.legendgamer.Realism.RealismCore.Blocks.WetSand;
 import ru.legendgamer.Realism.RealismCore.Blocks.Cactus.CactusSmall;
 import ru.legendgamer.Realism.RealismCore.Blocks.Cactus.OneStageCactus;
 import ru.legendgamer.Realism.RealismCore.Blocks.Cactus.SideCactus;
@@ -30,6 +29,7 @@ import ru.legendgamer.Realism.RealismCore.Blocks.DeadTree.DeadBranch;
 import ru.legendgamer.Realism.RealismCore.Blocks.ExTorch.ExTorch;
 import ru.legendgamer.Realism.RealismCore.Blocks.ExTorch.Torch;
 import ru.legendgamer.Realism.RealismCore.Blocks.FallenLeaves.FallenBlockLeaves;
+import ru.legendgamer.Realism.RealismCore.Blocks.Foods.PumpkinPie;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Acacia.GrowTreeStageOneAcacia;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.AppleTreeStageOne;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.AppleTreeStageTwo;
@@ -37,6 +37,9 @@ import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.BlockAppleTr
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.BranchAppleTree;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.LeavesAppleTree;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.AppleTree.SmallLeavesAppleTree;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Basic.BaseOakGrowLog;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Basic.DefaultOakGrowLog;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Basic.OakGrowLog;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Birch.BirchBranch;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Birch.GrowTreeStageOneBirch;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Birch.GrowTreeStageTwoBirch;
@@ -49,14 +52,21 @@ import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Spruce.GrowTreeStageOn
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Spruce.GrowTreeStageTwoSpruce;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Spruce.SmallLeavesSpruce;
 import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Spruce.SpruceBranch;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.TreeSeeds.BlockSeeds.BlockAppleSeeds;
 import ru.legendgamer.Realism.RealismCore.Blocks.Ocean.Corals;
 import ru.legendgamer.Realism.RealismCore.Blocks.Ocean.Seaweeds;
 import ru.legendgamer.Realism.RealismCore.Items.DryVine;
 import ru.legendgamer.Realism.RealismCore.Items.WetVine;
  
 public class RegBlocks {
+
+
+	
+	
 	public static Block panehorizontal = new PaneHorizontal(Material.WOOD, "panehorizontal", 3F, 3F, SoundType.WOOD);
-	//appletree
+	//appletree 
+	public static Block blockappleseed = new BlockAppleSeeds("blockappleseed",Blocks.FARMLAND, RegItems.itemapplesapling,RegItems.itemappleseeds,1,0,true);
+	
 	public static Block blockappletree = new BlockAppleTree(Material.WOOD, "blockappletree", 6F, 6F, SoundType.WOOD);
 	public static Block appletreeone = new AppleTreeStageOne(Material.WOOD, "appletreeone", 3F, 3F, "axe", 1, SoundType.WOOD);
 	public static Block appletreetwo = new AppleTreeStageTwo(Material.WOOD, "appletreetwo", 6F, 6F, "axe", 1, SoundType.WOOD);
@@ -100,15 +110,13 @@ public class RegBlocks {
 	public static Block wetvine = new WetVine(Material.LEAVES, "wetvine", 0.1F, 0.1F, "shears", 1, SoundType.GROUND);
 	public static Block dryvine = new DryVine(Material.LEAVES, "dryvine", 0.1F, 0.1F, "shears", 1, SoundType.GROUND);
 	//sand
-	public static Block wetsand = new WetSand(Material.SAND, "wetsand", 2F, 2F, SoundType.SAND);
-	public static Block wetredsand = new WetRedSand(Material.SAND, "wetredsand", 2F, 2F, SoundType.SAND);
-	public static Block realismsand = new RealismSand(Material.SAND, "realismsand", 2F, 2F, SoundType.SAND);
-	public static Block realismredsand = new RealismRedSand(Material.SAND, "realismredsand", 2F, 2F, SoundType.SAND);
+
+	
+
 	//moss
 	public static Block mossblock = new MossBlock(Material.LEAVES, "mossblock", 0.1F, 0.1F, "mossblock", 1, SoundType.GROUND);
 	//salt
 	public static Block saltblock = new BasicBlockWithDropItem(Material.ROCK, "saltblock", 2F, 2F, SoundType.STONE, RegItems.salt,4,0);
-	
 	//ocean
 		//corals
 	public static Block corals = new Corals(Material.WOOD, "corals", 3F, 3F, "axe", 1, SoundType.WOOD);
@@ -117,13 +125,13 @@ public class RegBlocks {
 	
 	public static Block coralblock = new BasicBlockWithDropItem(Material.ROCK, "coralblock", 3F, 3F, SoundType.STONE, Item.getItemFromBlock(RegBlocks.corals), 2,0);
 	
-//	public static Block cumpfire = new BlockFire("cumpfire", false);
+	public static Block cumpfire = new CumpfireBlock(Material.LEAVES, "cumpfire", 6F, 1, "pickaxe", 0, SoundType.WOOD);
 	
 
 	public static Block testgen = new TestGen(Material.LEAVES, "testgen", 0.1F, 0.1F, SoundType.GROUND);
 	
 	public static Block cactusone = new OneStageCactus(Material.WOOD, "cactusone", 3F, 3F, "axe", 1, SoundType.WOOD);
-	public static Block cactusside = new SideCactus("cactusside");
+	public static Block cactusside = new SideCactus("cactusside"); 
 	public static Block cactussmall = new CactusSmall(Material.GRASS, "cactussmall", 1F, 1F, "axe", 1, SoundType.WOOD);
 	
 	public static Block blockdrygrass = new BlockDryGrass(Material.GLASS, "blockdrygrass", 1F, 2F, SoundType.PLANT);
@@ -134,7 +142,6 @@ public class RegBlocks {
 	public static Block blockdeadtree = new BlockDeadTree(Material.WOOD, "blockdeadtree", 6F, "axe",  1, 3F, SoundType.WOOD);
 	
 
-	
 	public static Block torch = new Torch();
 	public static Block extorch = new ExTorch();
 	
@@ -144,11 +151,21 @@ public class RegBlocks {
 
 	public static Block fallenlayers = new FallenBlockLeaves(Material.LEAVES, "fallenlayers", 6F, 1, SoundType.WOOD);
 	
+	public static Block oakgrowlog = new OakGrowLog(Material.WOOD, "oakgrowlog", 6F, 1, "axe", 0, SoundType.WOOD);
+	public static Block baseoakgrowlog = new BaseOakGrowLog(Material.WOOD, "baseoakgrowlog", 6F, 1, "axe", 0, SoundType.WOOD);
+	public static Block defoakgrowlog = new DefaultOakGrowLog(Material.WOOD, "defoakgrowlog", 6F, 1, "axe", 0, SoundType.WOOD);
+	
+	public static final Block PUMPKIN_PIE = new PumpkinPie("pumpkin_pie");
+	
 
 	public static void register() {
-	
+		registerBlock(oakgrowlog);
+		
+		registerBlock(blockappleseed);
+		registerBlock(baseoakgrowlog);
+		registerBlock(defoakgrowlog);
 		registerBlock(fallenlayers);
-	//	registerBlock(compactworkbench);
+		registerBlock(PUMPKIN_PIE);
 		registerBlock(sprucebranch);
 		registerBlock(torch);
 		registerBlock(extorch);
@@ -182,14 +199,14 @@ public class RegBlocks {
 		registerBlock(growtreeone);
 		registerBlock(growtreetwo);
 		registerBlock(saltblock);
-		registerBlock(wetsand);
+
 		registerBlock(kaolinit);
-	//	registerBlock(cumpfire);
-		registerBlock(wetredsand);
-		registerBlock(realismredsand);
+		registerBlock(cumpfire);
+
+
 		registerBlock(wetvine);
 		registerBlock(mossblock);
-		registerBlock(realismsand);
+
 		registerBlock(dryvine);
 		registerBlock(smallleaves);
 		registerBlock(growtreeonespruce);
@@ -197,11 +214,15 @@ public class RegBlocks {
 		registerBlock(smallleavesspruce);
 	}
 	public static void registerRender() {
-	
+		registerRenderBlock(oakgrowlog);
+		registerRenderBlock(defoakgrowlog);
 		
+		registerRenderBlock(blockappleseed);
+
+		registerRenderBlock(baseoakgrowlog);
 		registerRenderBlock(fallenlayers);
 		registerRenderBlock(sprucebranch);
-//		registerRenderBlock(compactworkbench);
+		registerRenderBlock(PUMPKIN_PIE);
 		registerRenderBlock(extorch);
 		registerRenderBlock(torch);
 		registerRenderBlock(connectblock);
@@ -232,14 +253,13 @@ public class RegBlocks {
 		registerRenderBlock(growtreetwobirch);
 		registerRenderBlock(copperore);
 		registerRenderBlock(growtreeone);
-	//	registerRenderBlock(cumpfire);
+		registerRenderBlock(cumpfire);
 		registerRenderBlock(kaolinit);
-		registerRenderBlock(wetsand);
-		registerRenderBlock(wetredsand);
+
 		registerRenderBlock(saltblock);
-		registerRenderBlock(realismredsand);
+
 		registerRenderBlock(growtreetwo);
-		registerRenderBlock(realismsand);
+
 		registerRenderBlock(wetvine);
 		registerRenderBlock(dryvine);
 		registerRenderBlock(mossblock);

@@ -28,8 +28,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlock;
 import ru.legendgamer.Realism.RealismCore.Realism;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlock;
 
 public class FallenBlockLeaves extends BasicBlock
 {

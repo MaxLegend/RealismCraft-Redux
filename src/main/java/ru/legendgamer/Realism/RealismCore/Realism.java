@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import ru.legendgamer.Realism.Command.RealismCommand;
 import ru.legendgamer.Realism.Proxy.CommonProxy;
 import ru.legendgamer.Realism.RealismCore.CreativeTabs.DevRealism;
+import ru.legendgamer.Realism.RealismCore.CreativeTabs.FoodRealism;
 import ru.legendgamer.Realism.RealismCore.CreativeTabs.MainRealism;
 
 @Mod(modid = Realism.MODID, version = Realism.VERSION)
@@ -26,6 +27,7 @@ public class Realism
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final String[] AUTHORS = new String[] {"LegendGamer"};
 	public static CreativeTabs tabMain = new MainRealism("tabMain");
+	public static CreativeTabs tabFood = new FoodRealism("tabFood");
 	public static CreativeTabs tabDev = new DevRealism("tabDev");
 	@SidedProxy(clientSide = "ru.legendgamer.Realism.Proxy.ClientProxy", serverSide = "ru.legendgamer.Realism.Proxy.CommonProxy")
 	public static CommonProxy proxy;

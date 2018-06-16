@@ -31,6 +31,7 @@ public class Ash extends Block{
 
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
 	{
+	
 		return ash_AABB;
 	}
 

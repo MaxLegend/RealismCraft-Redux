@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "isbase=false": { "model": "realism:growtree/stage_4_basef" },
+	"isbase=true": { "model": "realism:growtree/stage_4_baset" }
+    }
+}

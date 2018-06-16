@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "age=0": { "model": "realism:blockappleseed_0" },
+	"age=1": { "model": "realism:blockappleseed_1" },
+	"age=2": { "model": "realism:blockappleseed_2" },
+	"age=3": { "model": "realism:blockappleseed_3" },
+	"age=4": { "model": "realism:blockappleseed_4" }
+    }
+}

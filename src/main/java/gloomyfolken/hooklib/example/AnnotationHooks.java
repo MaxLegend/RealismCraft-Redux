@@ -1,12 +1,10 @@
 package gloomyfolken.hooklib.example;
 
-import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
 
 import gloomyfolken.hooklib.asm.Hook;
 import gloomyfolken.hooklib.asm.ReturnCondition;
@@ -21,35 +19,34 @@ import net.minecraft.block.BlockOldLeaf;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockRedstoneWire;
+import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockStem;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.DestroyBlockProgress;
-import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFlowerPot;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumHandSide;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -59,7 +56,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraft.world.gen.feature.WorldGenCactus;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.legendgamer.Realism.API.BasicItem.BasicDamageFood;
+import ru.legendgamer.Realism.API.BasicItem.BasicFood;
+import ru.legendgamer.Realism.API.BasicRegistry.BasicRegistry;
+import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
 public class AnnotationHooks {
 
@@ -73,19 +75,141 @@ public class AnnotationHooks {
 			return p_apply_1_.getMetadata() < 4;
 		}
 	});
-   
-  
-   
+	public double getDurabilityForDisplay(ItemStack stack)
+	{
+		return (double)stack.getItemDamage() / (double)stack.getMaxDamage();
+	}
+	
 
-    
+	@Hook(returnCondition = ReturnCondition.ALWAYS, isMandatory = true)
+	public static void registerBlock(Block block, int id, ResourceLocation res, Block blockToRegister) {
+		if(id == 17) {
+			Block.REGISTRY.register(id, res, BasicRegistry.realismLogs);
+		} else 	if(id == 12) {
+			Block.REGISTRY.register(id, res, BasicRegistry.realsand);
+		}
+		else
+			Block.REGISTRY.register(id, res, blockToRegister);
+	}
+
+	@Hook(returnCondition = ReturnCondition.ON_NOT_NULL, isMandatory = true)
+	public static Block getRegisteredBlock(Blocks inst, String name) {
+		if(name.equals("log")){
+			return BasicRegistry.realismLogs;
+		} 
+		else 	
+			if(name.equals("sand")){
+			return BasicRegistry.realsand;
+		} else
+
+		return null;
+	}
+
+	
+	
+
+	@SideOnly(Side.CLIENT)
+	@Hook(returnCondition = ReturnCondition.ALWAYS)
+	public static void renderItemOverlayIntoGUI(RenderItem ri, FontRenderer fr, ItemStack stack, int xPosition, int yPosition, @Nullable String text)
+	{
+		if (!stack.isEmpty())
+		{
+			if (stack.getCount() != 1 || text != null)
+			{
+				String s = text == null ? String.valueOf(stack.getCount()) : text;
+				GlStateManager.disableLighting();
+				GlStateManager.disableDepth();
+				GlStateManager.disableBlend();
+				fr.drawStringWithShadow(s, (float)(xPosition + 19 - 2 - fr.getStringWidth(s)), (float)(yPosition + 6 + 3), 16777215);
+				GlStateManager.enableLighting();
+				GlStateManager.enableDepth();
+				GlStateManager.enableBlend();
+			}
+
+			if (stack.getItem().showDurabilityBar(stack))
+			{
+				GlStateManager.disableLighting();
+				GlStateManager.disableDepth();
+				GlStateManager.disableTexture2D();
+				GlStateManager.disableAlpha();
+				GlStateManager.disableBlend();
+				Tessellator tessellator = Tessellator.getInstance();
+				BufferBuilder bufferbuilder = tessellator.getBuffer();
+				double health = stack.getItem().getDurabilityForDisplay(stack);
+				int rgbfordisplay = stack.getItem().getRGBDurabilityForDisplay(stack);
+				int i = Math.round(13.0F - (float)health * 13.0F);
+				int j = rgbfordisplay;
+				draw(bufferbuilder, xPosition + 2, yPosition + 12, 13, 3, 0, 0, 0, 255);
+				draw(bufferbuilder, xPosition + 2, yPosition + 12, i, 1, j >> 16 & 255, j >> 8 & 255, j & 255, 255);
+				GlStateManager.enableBlend();
+				GlStateManager.enableAlpha();
+				GlStateManager.enableTexture2D();
+				GlStateManager.enableLighting();
+				GlStateManager.enableDepth();
+			}
+
+			EntityPlayerSP entityplayersp = Minecraft.getMinecraft().player;
+			float f3 = entityplayersp == null ? 0.0F : entityplayersp.getCooldownTracker().getCooldown(stack.getItem(), Minecraft.getMinecraft().getRenderPartialTicks());
+
+			if (stack.getItem() instanceof BasicFood)
+			{
+				GlStateManager.disableLighting();
+				GlStateManager.disableDepth();
+				GlStateManager.disableTexture2D();
+				GlStateManager.disableAlpha();
+				GlStateManager.disableBlend();
+				Tessellator tessellator = Tessellator.getInstance();
+				BufferBuilder bufferbuilder = tessellator.getBuffer();	
+
+				BasicDamageFood bf = (BasicDamageFood)stack.getItem();	
+				NBTTagCompound tag = BasicDamageFood.getNbt(stack);
+
+				int health = tag.getInteger(BasicDamageFood.CHARACTERISTIC);
+				int rgbfordisplay = stack.getItem().getRGBDurabilityForDisplay(stack);
+				int i = Math.round(13.0F - (float)health * 13.0F);
+				int j = rgbfordisplay; 
+
+				draw(bufferbuilder, xPosition + 2, yPosition + 13, health, 1,
+						j >> 16 & 255,
+						j >> 8 & 255,
+						j & 255, 255 
+						);
+				GlStateManager.enableBlend();
+				GlStateManager.enableAlpha();
+				GlStateManager.enableTexture2D();
+				GlStateManager.enableLighting();
+				GlStateManager.enableDepth();
+			}
+
+			if (f3 > 0.0F)
+			{
+				GlStateManager.disableLighting();
+				GlStateManager.disableDepth();
+				GlStateManager.disableTexture2D();
+				Tessellator tessellator1 = Tessellator.getInstance();
+				BufferBuilder bufferbuilder1 = tessellator1.getBuffer();
+				draw(bufferbuilder1, xPosition, yPosition + MathHelper.floor(16.0F * (1.0F - f3)), 16, MathHelper.ceil(16.0F * f3), 255, 255, 255, 127);
+				GlStateManager.enableTexture2D();
+				GlStateManager.enableLighting();
+				GlStateManager.enableDepth();
+			}
+		}
+	}
+
+	private static void draw(BufferBuilder renderer, int x, int y, int width, int height, int red, int green, int blue, int alpha)
+	{
+		renderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+		renderer.pos((double)(x + 0), (double)(y + 0), 0.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos((double)(x + 0), (double)(y + height), 0.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos((double)(x + width), (double)(y + height), 0.0D).color(red, green, blue, alpha).endVertex();
+		renderer.pos((double)(x + width), (double)(y + 0), 0.0D).color(red, green, blue, alpha).endVertex();
+		Tessellator.getInstance().draw();
+	}
 
 	public static int tickRate(World worldIn)
 	{
 		return 2;
 	}
-
-
-
 	@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
 	public static void neighborChanged(BlockDirt bl,IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -301,13 +425,40 @@ public class AnnotationHooks {
 
 			}
 	 */
-	@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
-	public static void onBlockAdded(BlockLeaves bl,World world, BlockPos pos, IBlockState state) {
-		world.scheduleBlockUpdate(pos, Blocks.LEAVES, 1, 0);
-		world.scheduleBlockUpdate(pos, Blocks.LEAVES2, 1, 0);
-	}
 
+	
+	@Hook(returnCondition = ReturnCondition.ALWAYS)
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        int i = 1;
+        int j = 2;
+        int k = pos.getX();
+        int l = pos.getY();
+        int i1 = pos.getZ();
+		if(worldIn.isAirBlock(pos.down())) {		
+			Realism.proxy.particleClient(worldIn, pos, worldIn.rand);
+	
+		}
+        if (worldIn.isAreaLoaded(new BlockPos(k - 2, l - 2, i1 - 2), new BlockPos(k + 2, l + 2, i1 + 2)))
+        {
+            for (int j1 = -1; j1 <= 1; ++j1)
+            {
+                for (int k1 = -1; k1 <= 1; ++k1)
+                {
+                    for (int l1 = -1; l1 <= 1; ++l1)
+                    {
+                        BlockPos blockpos = pos.add(j1, k1, l1);
+                        IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
+                        if (iblockstate.getBlock().isLeaves(iblockstate, worldIn, blockpos))
+                        {
+                            iblockstate.getBlock().beginLeavesDecay(iblockstate, worldIn, blockpos);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 	@Hook(createMethod = true, returnCondition = ReturnCondition.ALWAYS)
@@ -324,7 +475,7 @@ public class AnnotationHooks {
 
 	private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Block>, IBlockColor> blockColorMap = com.google.common.collect.Maps.newHashMap();
 
-
+	@SideOnly(Side.CLIENT)
 	@Hook(returnCondition = ReturnCondition.ALWAYS)
 	public static BlockColors init(BlockColors bc) {
 		final BlockColors blockcolors = new BlockColors();
@@ -504,221 +655,7 @@ public class AnnotationHooks {
 		}
 	}
 
-	static Minecraft mc = Minecraft.getMinecraft();
-	public static float thirdPersonDistancePrev = 4.0F;
-	private static boolean cloudFog;
-	//Big classe render
-	//@Hook(returnCondition = ReturnCondition.ALWAYS)
-	public static void updateLightmap(EntityRenderer render, float partialTicks)
-	{
-		//	System.out.println("ѕездато работет");
-		boolean lightmapUpdateNeeded = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "lightmapUpdateNeeded");
-		float torchFlickerX = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "torchFlickerX");
-		float bossColorModifier = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "bossColorModifier");
-		float bossColorModifierPrev = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "bossColorModifierPrev");
-		int[] lightmapColors = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "lightmapColors");
-		DynamicTexture lightmapTexture = ObfuscationReflectionHelper.getPrivateValue(EntityRenderer.class, render, "lightmapTexture");
-		if (lightmapUpdateNeeded)
-		{
-			Minecraft.getMinecraft().mcProfiler.startSection("lightTex");
-			World world = Minecraft.getMinecraft().world;
 
-			if (world != null)
-			{
-				float getSunBrightness = world.getSunBrightness(1.0F);
-				float f1 = getSunBrightness * 1F;
-
-				for (int i = 0; i < 256; ++i)
-				{
-					float getLightBrightnessTable = world.provider.getLightBrightnessTable()[i / 16] * f1;
-					float getLightBrightnessTableT = world.provider.getLightBrightnessTable()[i % 16] * (torchFlickerX * 0.1F + 1.5F);
-
-					if (world.getLastLightningBolt() > 0)
-					{
-						getLightBrightnessTable = world.provider.getLightBrightnessTable()[i / 16];
-					}
-
-					float f4 = getLightBrightnessTable * (getSunBrightness * 0.65F + 0.35F);
-					float f5 = getLightBrightnessTable * (getSunBrightness * 0.65F + 0.35F);
-					float f6 = getLightBrightnessTableT * ((getLightBrightnessTableT * 0.6F + 0.4F) * 0.6F + 0.4F);
-					float f7 = getLightBrightnessTableT * (getLightBrightnessTableT * getLightBrightnessTableT * 0.6F + 0.4F);
-					float f8 = f4 + getLightBrightnessTableT;
-					float f9 = f5 + f6;
-					float f10 = getLightBrightnessTable + f7;
-					f8 = f8 * 0.96F + 0.03F;
-					f9 = f9 * 0.96F + 0.03F;
-					f10 = f10 * 0.96F + 0.03F;
-
-
-					if (bossColorModifier > 0.0F)
-					{
-						float f11 = bossColorModifierPrev + (bossColorModifier - bossColorModifierPrev) * partialTicks;
-						f8 = f8 * (1.0F - f11) + f8 * 0.7F * f11;
-						f9 = f9 * (1.0F - f11) + f9 * 0.6F * f11;
-						f10 = f10 * (1.0F - f11) + f10 * 0.6F * f11;
-					}
-					if (world.provider.getDimensionType().getId() == 1)
-					{
-						f8 = 0.22F + getLightBrightnessTableT * 0.75F;
-						f9 = 0.28F + f6 * 0.75F;
-						f10 = 0.25F + f7 * 0.75F;
-					}
-
-					if (f8 > 1.0F)
-					{
-						f8 = 1.0F;
-					}
-
-					if (f9 > 1.0F)
-					{
-						f9 = 1.0F;
-					}
-
-					if (f10 > 1.0F)
-					{
-						f10 = 1.0F;
-					}
-
-					float f16 = mc.gameSettings.gammaSetting;
-					float f17 = 1.0F - f8;
-					float f13 = 1.0F - f9;
-					float f14 = 1.0F - f10;
-					f17 = 1.0F - f17 * f17 * f17 * f17;
-					f13 = 1.0F - f13 * f13 * f13 * f13;
-					f14 = 1.0F - f14 * f14 * f14 * f14;
-					f8 = f8 * (1.0F - f16) + f17 * f16;
-					f9 = f9 * (1.0F - f16) + f13 * f16;
-					f10 = f10 * (1.0F - f16) + f14 * f16;
-					f8 = f8 * 0.96F + 0.03F;
-					f9 = f9 * 0.96F + 0.03F;
-					f10 = f10 * 0.96F + 0.03F;
-
-					if (f8 > 1.0F)
-					{
-						f8 = 1.0F;
-					}
-
-					if (f9 > 1.0F)
-					{
-						f9 = 1.0F;
-					}
-
-					if (f10 > 1.0F)
-					{
-						f10 = 1.0F;
-					}
-
-					if (f8 < 0.0F)
-					{
-						f8 = 0.0F;
-					}
-
-					if (f9 < 0.0F)
-					{
-						f9 = 0.0F;
-					}
-
-					if (f10 < 0.0F)
-					{
-						f10 = 0.0F;
-					}
-
-
-					//цвета?!
-					int j = 255;
-					int k = (int)(f8 * 255.0F);
-					int l = (int)(f9 * 255.0F);
-					int i1 = (int)(f10 * 255.0F);
-
-					lightmapColors[i] = -16777216 | k << 16 | l << 8 | i1;
-
-
-					if (mc.player.isPotionActive(MobEffects.NIGHT_VISION))
-					{
-
-
-						float getNightVis = getNightVisionBrightness(mc.player, partialTicks);
-						float f12 = 4.0F / f8;
-
-						if (f12 > 1.0F / f9)
-						{
-							f12 = 1.0F / f9;
-						}
-
-						if (f12 > 1.0F / f10)
-						{
-							f12 = 1.0F / f10;
-						}
-
-						f8 = f8 * (1.0F - getNightVis) + f8 * f12 * getNightVis;
-						f9 = f9 * (1.0F - getNightVis) + f9 * f12 * getNightVis;
-						f10 = f10 * (1.0F - getNightVis) + f10 * f12 * getNightVis;
-						lightmapColors[i] = -40293745 | k << 16 | l << 8 | i1;
-
-						//¬еселые комбинации
-						/*
-						 * 16777216 - норма
-						 * 25500139 - €рко-темнозеленый
-						 * 15678234 - сочно-зеленый
-						 * 40293745 - кроваво -красный цвет €рости
-						 */
-					}
-				}					   //12345678
-				//¬еселые комбинации
-				/*
-				 * 16777216 - норма
-				 * 25500139 - €рко-темнозеленый
-				 * 15678234 - сочно-зеленый
-				 * 40293745 - кроваво -красный цвет €рости
-				 */
-
-				lightmapTexture.updateDynamicTexture();
-				lightmapUpdateNeeded = false;
-				Minecraft.getMinecraft().mcProfiler.endSection();
-			}
-		}
-		return;
-	}
-	public static float getNightVisionBrightness(EntityLivingBase entitylivingbaseIn, float partialTicks)
-	{
-		int i = entitylivingbaseIn.getActivePotionEffect(MobEffects.NIGHT_VISION).getDuration();
-		return i > 200 ? 1.0F : 0.7F + MathHelper.sin(((float)i - partialTicks) * (float)Math.PI * 0.2F) * 0.3F;
-	}
-	public static void getLightmapColors(float partialTicks, float sunBrightness, float skyLight, float blockLight, float[] colors) {
-
-	}
-	
-	  private  static void preRenderDamagedBlocks()
-	    {
-	        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.DST_COLOR, GlStateManager.DestFactor.SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-	        GlStateManager.enableBlend();
-	        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.5F);
-	        GlStateManager.doPolygonOffset(-3.0F, -3.0F);
-	        GlStateManager.enablePolygonOffset();
-	        GlStateManager.alphaFunc(516, 0.1F);
-	        GlStateManager.enableAlpha();
-	        GlStateManager.pushMatrix();
-	    }
-
-	    private static void postRenderDamagedBlocks()
-	    {
-	        GlStateManager.disableAlpha();
-	        GlStateManager.doPolygonOffset(0.0F, 0.0F);
-	        GlStateManager.disablePolygonOffset();
-	        GlStateManager.enableAlpha();
-	        GlStateManager.depthMask(true);
-	        GlStateManager.popMatrix();
-	    }
-	    private  static Map<Integer, DestroyBlockProgress> damagedBlocks = Maps.<Integer, DestroyBlockProgress>newHashMap();
-	    //хук в рендер ворд пасс либо запилить что то наподобие своей системы, но хуки придетс€ юзать все равно иначе без ванильки останусь
-	    private  static TextureAtlasSprite destroyBlockIcons = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite("realism:blocks/panehorizontal");
-	//	@Hook(returnCondition = ReturnCondition.ALWAYS)
-	
-
-	
-	
-	
-	
 }
 /*
  * получить игрока из ентиту

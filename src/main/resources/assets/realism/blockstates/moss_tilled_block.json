@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "realism:moss_tilled_block" }
+  }
+}

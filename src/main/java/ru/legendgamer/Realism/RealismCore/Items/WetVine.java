@@ -16,10 +16,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
+import ru.legendgamer.Realism.API.BasicBlock.DevBasicBlock;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
 import ru.legendgamer.Realism.RealismCore.RegItems;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.DevBasicBlock;
 
 public class WetVine extends DevBasicBlock {
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();

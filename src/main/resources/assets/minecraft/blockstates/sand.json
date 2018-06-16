@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "iswet=true": { "model": "realism:sand_wet" },
+        "iswet=false": { "model": "realism:sand_dry"}
+    }
+}

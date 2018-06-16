@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "axis=y,setet=true":  { "model": "birch_log" },
+        "axis=z,setet=true":   { "model": "birch_log", "x": 90 },
+        "axis=x,setet=true":   { "model": "birch_log", "x": 90, "y": 90 },
+        "axis=none,setet=true": { "model": "birch_bark" },       
+	"axis=y,setet=false":  { "model": "birch_log" },
+        "axis=z,setet=false":   { "model": "birch_log", "x": 90 },
+        "axis=x,setet=false":   { "model": "birch_log", "x": 90, "y": 90 },
+        "axis=none,setet=false": { "model": "birch_bark" }
+}
+}

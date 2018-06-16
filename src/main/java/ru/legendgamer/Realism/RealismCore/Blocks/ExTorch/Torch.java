@@ -29,8 +29,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlock;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlock;
 
 public class Torch extends BasicBlock
 {

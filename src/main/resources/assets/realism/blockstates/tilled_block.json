@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "normal": { "model": "realism:tilled_block" }
+  }
+}

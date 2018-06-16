@@ -8,8 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapProvider;
 import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
@@ -20,10 +21,10 @@ public class CalendarRenderEvent {
 	static Minecraft mc = Minecraft.getMinecraft();
 	public static final ResourceLocation guiCalendar = new ResourceLocation("realism:textures/gui/calendar.png");
 
-
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void calendar(RenderGameOverlayEvent.Post event) {
-		World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		World world = mc.world;
        
 		IDate date = world.getCapability(DateProvider.DATE, null);
 		IPlayerCap cap = Minecraft.getMinecraft().player.getCapability(PlayerCapProvider.LEVEL_CAP, null);

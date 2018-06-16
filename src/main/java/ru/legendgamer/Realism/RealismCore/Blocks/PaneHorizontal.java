@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlock;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlock;
 
 public class PaneHorizontal extends BasicBlock{
 	protected static final AxisAlignedBB pane_AABB = new AxisAlignedBB(0D, 0.45D, 0D, 1D, 0.55D, 1D);

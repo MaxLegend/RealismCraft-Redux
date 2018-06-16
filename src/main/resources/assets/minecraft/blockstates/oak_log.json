@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "axis=y,setet=true":    { "model": "oak_log" },
+        "axis=z,setet=true":     { "model": "oak_log", "x": 90 },
+        "axis=x,setet=true":     { "model": "oak_log", "x": 90, "y": 90 },
+        "axis=none,setet=true":   { "model": "oak_bark" },
+        "axis=y,setet=false":    { "model": "oak_log" },
+        "axis=z,setet=false":     { "model": "oak_log", "x": 90 },
+        "axis=x,setet=false":     { "model": "oak_log", "x": 90, "y": 90 },
+        "axis=none,setet=false":   { "model": "oak_bark" }
+    }
+}

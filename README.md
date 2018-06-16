@@ -1,2 +1,0 @@
-# RealismCraft-Redux
-RealismCraft-Redux

@@ -85,10 +85,6 @@ public class BlockAppleTree extends BlockRotatedPillar {
 		return false;
 	}
 
-	/**
-	 * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-	 * blockstate.
-	 */
 	public IBlockState withRotation(IBlockState state, Rotation rot)
 	{
 		switch (rot)

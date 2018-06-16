@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockSide extends BlockHorizontal
 {
+	
     private AxisAlignedBB[] SIDE_AABB;
 
     public BlockSide(String name, Material material, AxisAlignedBB[] aabb)

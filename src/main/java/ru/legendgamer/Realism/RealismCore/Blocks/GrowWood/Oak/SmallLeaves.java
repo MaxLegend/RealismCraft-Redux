@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockWithCustomModel;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithCustomModel;
 
 public class SmallLeaves extends BasicBlockWithCustomModel{
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();
@@ -81,14 +81,16 @@ public class SmallLeaves extends BasicBlockWithCustomModel{
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		world.scheduleBlockUpdate(pos, this, 1, 0);
+		world.isUpdateScheduled(pos, state.getBlock());
 		time.add(new TimerForCoord(pos.getX(),pos.getY(),pos.getZ(),0));
 	}
+	
+
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 
 		super.updateTick(world, pos, state, rand);
-
-		
+	
 		TimerForCoord time2 = null;
 		for (TimerForCoord t : time) {
 			if (t != null && t.x == pos.getX() && t.y == pos.getY() && t.z == pos.getZ()) {
@@ -97,21 +99,9 @@ public class SmallLeaves extends BasicBlockWithCustomModel{
 			}
 		}
 		if (time2 == null) return;
-		world.scheduleBlockUpdate(pos, this, 1, 0);
-
 		if(!world.isRemote) {
-
+				world.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK));	
 		}
-			if (time2.time == 20) {
-				world.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), Blocks.LEAVES.getDefaultState().withProperty(BlockOldLeaf.VARIANT, BlockPlanks.EnumType.OAK));
-			}		
-		
 	}
-	@Override
-    public Block setBlockUnbreakable()
-    {
-        this.setHardness(-1.0F);
-        return this;
-    }
 }
 

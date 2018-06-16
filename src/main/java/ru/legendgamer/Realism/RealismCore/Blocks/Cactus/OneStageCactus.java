@@ -18,9 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithCustomModel;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockWithCustomModel;
 
 public class OneStageCactus extends BasicBlockWithCustomModel {
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();
@@ -37,11 +37,7 @@ public class OneStageCactus extends BasicBlockWithCustomModel {
 		this.setHardness(-1.0F);
 		return this;
 	}
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return world.getBlockState(pos.down()).getBlock() == Blocks.SAND || world.getBlockState(pos.down()).getBlock() == RegBlocks.realismsand || world.getBlockState(pos.down()).getBlock() == RegBlocks.realismredsand;
-	}
+
 
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {

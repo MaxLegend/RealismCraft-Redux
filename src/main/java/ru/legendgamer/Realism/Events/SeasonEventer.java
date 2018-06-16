@@ -1,23 +1,28 @@
 package ru.legendgamer.Realism.Events;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeProvider;
 import net.minecraftforge.event.terraingen.BiomeEvent;
-import net.minecraftforge.event.world.ChunkDataEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
 import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
+import ru.legendgamer.Realism.PacketSystem.NetworkHandler;
+import ru.legendgamer.Realism.PacketSystem.Packets.Server.MonthSyncMessageServer;
 
 public class SeasonEventer {
-
+	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void biomeColorGrass(BiomeEvent.GetGrassColor e) {	
-		World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		
+		World world = Minecraft.getMinecraft().world;
 		IDate date = world.getCapability(DateProvider.DATE, null);
-
+		EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().player;
 
 		/**
 		 * 0 - winter
@@ -34,21 +39,45 @@ public class SeasonEventer {
 		 * 11 - early winter
 		 */ 
 		//Winter
-		if(date.getMonth() == 11) e.setNewColor(0xC2D6C3);
-		if(date.getMonth() == 0) e.setNewColor(0xC2D6C3);
-		if(date.getMonth() == 1) e.setNewColor(0xE3FCE4);
+		if(date.getMonth() == 11) {e.setNewColor(0xC2D6C3);
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 0) {e.setNewColor(0xC2D6C3);
+				NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 1) {e.setNewColor(0xE3FCE4);
+				NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
 		//Spring
-		if(date.getMonth() == 2) e.setNewColor(0xAFEBB2);
-		if(date.getMonth() == 3) e.setNewColor(0x89FF8F);
-		if(date.getMonth() == 4) e.setNewColor(0x60E167);
+		if(date.getMonth() == 2) {e.setNewColor(0xAFEBB2);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 3) {e.setNewColor(0x89FF8F);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 4) {e.setNewColor(0x60E167);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
 		//Summer
-		if(date.getMonth() == 5) e.setNewColor(0xDDDD55);
-		if(date.getMonth() == 6) e.setNewColor(0xDCDC47);
-		if(date.getMonth() == 7) e.setNewColor(0xB4DC47);
+		if(date.getMonth() == 5) {e.setNewColor(0xDDDD55);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 6) {e.setNewColor(0xDCDC47);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 7) { e.setNewColor(0xB4DC47);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
 		//Autunm
-		if(date.getMonth() == 8) e.setNewColor(0xBECE0F);
-		if(date.getMonth() == 9) e.setNewColor(0xCFDF1C);
-		if(date.getMonth() == 10) e.setNewColor(0xCED771);
+		if(date.getMonth() == 8) { e.setNewColor(0xBECE0F);	
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 9) {e.setNewColor(0xCFDF1C);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
+		if(date.getMonth() == 10) {e.setNewColor(0xCED771);		
+			NetworkHandler.network.sendToServer(new MonthSyncMessageServer(date.getMonth()));
+		}
 
 		//		else e.setNewColor(0x60E167);
 		//0xDDDD55 - лето
@@ -59,7 +88,7 @@ public class SeasonEventer {
 
 
 	}
-
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void biomeColorWater(BiomeEvent.GetWaterColor e) {
 
@@ -70,9 +99,10 @@ public class SeasonEventer {
 		} else { e.setNewColor(0xDDDD55); }
 
 	}
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void biomeColorFoliage(BiomeEvent.GetFoliageColor e) {
-		World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		World world = Minecraft.getMinecraft().world;
 		IDate date = world.getCapability(DateProvider.DATE, null);
 
 		if (e.getBiome() != Biomes.DESERT || e.getBiome() != Biomes.DESERT_HILLS)
@@ -98,14 +128,13 @@ public class SeasonEventer {
 			//0xFFE269 - желтая листва 
 			//0x00FF0D - весна
 			//0xFFFFFF - зима(по идее листва должна пропадать)
-
-
 		}
 	}
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void onBiome(BiomeEvent e)
 	{
-		World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		World world = Minecraft.getMinecraft().world;
 		IDate date = world.getCapability(DateProvider.DATE, null);
 
 
@@ -115,7 +144,7 @@ public class SeasonEventer {
 
 			if(e.getBiome() == Biomes.BIRCH_FOREST || e.getBiome() == Biomes.BIRCH_FOREST_HILLS|| e.getBiome() == Biomes.COLD_BEACH|| e.getBiome() == Biomes.FOREST) {
 
-				
+
 				e.getBiome().enableSnow = true;
 				e.getBiome().temperature = 0.0F;	
 

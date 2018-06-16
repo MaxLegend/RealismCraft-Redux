@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "bites=0": { "model": "realism:pumpkin_pie_full" },
+        "bites=1": { "model": "realism:pumpkin_pie_part1" },
+        "bites=2": { "model": "realism:pumpkin_pie_part2" },
+        "bites=3": { "model": "realism:pumpkin_pie_part3" },
+        "bites=4": { "model": "realism:pumpkin_pie_part4" },
+        "bites=5": { "model": "realism:pumpkin_pie_part5" },
+        "bites=6": { "model": "realism:pumpkin_pie_part6" }
+    }
+}

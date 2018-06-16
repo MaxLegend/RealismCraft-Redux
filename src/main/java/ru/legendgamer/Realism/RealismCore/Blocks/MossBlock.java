@@ -12,9 +12,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import ru.legendgamer.Realism.API.BasicBlock.DevBasicBlock;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegItems;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.DevBasicBlock;
 
 public class MossBlock extends DevBasicBlock{
 	 

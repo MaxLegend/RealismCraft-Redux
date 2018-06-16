@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "puddled=false": { "model": "realism:dirtpuddled_dry" },
+        "puddled=true":  { "model": "realism:dirtpuddled_wet" }
+    }
+}

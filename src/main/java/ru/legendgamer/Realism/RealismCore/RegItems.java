@@ -2,6 +2,7 @@ package ru.legendgamer.Realism.RealismCore;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemFood;
@@ -9,10 +10,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import ru.legendgamer.Realism.API.ItemDrink;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicDamageItem;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicFood;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicItem;
+import ru.legendgamer.Realism.API.BasicItem.BasicDamageItem;
+import ru.legendgamer.Realism.API.BasicItem.BasicFood;
+import ru.legendgamer.Realism.API.BasicItem.BasicItem;
 import ru.legendgamer.Realism.RealismCore.Blocks.FallenLeaves.ItemFallenLeaves;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.TreeSeeds.ItemSaplings.ItemAppleSapling;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.TreeSeeds.ItemSeeds.ItemTreeSeeds;
 import ru.legendgamer.Realism.RealismCore.Items.Counter;
 import ru.legendgamer.Realism.RealismCore.Items.ItemRealPickaxe;
 import ru.legendgamer.Realism.RealismCore.Items.ItemRealShovel;
@@ -35,53 +38,50 @@ public class RegItems {
 //	public static Item branchbirchitem = new ItemBranchBirch("branchbirchitem",1);
 	
 //	public static Item newstoneaxe = new NewStoneAxe("newstoneaxe",Realism.StoneMaterial);
-	public static Item bladestoneaxe = new BasicItem("bladestoneaxe",64);
+	public static final Item BLADE_STONE_AXE = new BasicItem("bladestoneaxe",64);
 	
-	public static Item bladestoneshovel = new BasicItem("bladestoneshovel",64);
+	public static final Item bladestoneshovel = new BasicItem("bladestoneshovel",64);
 			
-	public static Item handfuldirt = new BasicItem("handfuldirt",64);
-	public static Item dirtformshovel = new BasicItem("dirtformshovel",64);
-	public static Item dirtformaxe = new BasicItem("dirtformaxe",64);
-	public static Item dirtformchisel = new BasicItem("dirtformchisel",64);
+	public static final Item handfuldirt = new BasicItem("handfuldirt",64);
+	public static final Item dirtformshovel = new BasicItem("dirtformshovel",64);
+	public static final Item dirtformaxe = new BasicItem("dirtformaxe",64);
+	public static final Item dirtformchisel = new BasicItem("dirtformchisel",64);
 	
-	public static Item kaolin = new BasicItem("kaolin",64);
-	public static Item kaolindust = new Kaolin("kaolindust",64);
+	public static final Item kaolin = new BasicItem("kaolin",64);
+	public static final Item kaolindust = new Kaolin("kaolindust",64);
 	
-	public static Item stonebladechisel = new BasicItem("stonebladechisel",64);
+	public static final Item stonebladechisel = new BasicItem("stonebladechisel",64);
 	
-	public static Item annealedclaycup = new BasicItem("annealedclaycup",1);
-	public static Item annealedclaycupfull = new ItemDrink("annealedclaycupfull",1,10,RegItems.annealedclaycup);
+	public static final Item annealedclaycup = new BasicItem("annealedclaycup",1);
+	public static final Item annealedclaycupfull = new ItemDrink("annealedclaycupfull",1,10,RegItems.annealedclaycup);
 	
-	public static Item stonechisel = new BasicDamageItem("stonechisel",1,64);
-	public static Item pistil = new BasicDamageItem("pistil",1,64);
+	public static final Item stonechisel = new BasicDamageItem("stonechisel",1,64);
+	public static final Item pistil = new BasicDamageItem("pistil",1,64);
 	
-	public static Item claycup = new BasicItem("claycup",64);
-	public static Item clayplate = new BasicItem("clayplate",64);
-	public static Item annealedclayplate = new BasicItem("annealedclayplate",64);
+	public static final Item claycup = new BasicItem("claycup",64);
+	public static final Item clayplate = new BasicItem("clayplate",64);
+	public static final Item annealedclayplate = new BasicItem("annealedclayplate",64);
 	
-	public static Item itemcup = new BasicItem("itemcup",1);
-	public static Item itemcupfill = new ItemDrink("itemcupfill",1,30, RegItems.itemcup);
+	public static final Item itemcup = new BasicItem("itemcup",1);
+	public static final Item itemcupfill = new ItemDrink("itemcupfill",1,30, RegItems.itemcup);
 	
-	public static ItemFood konin = new BasicFood(8, 6F, true, "konin");
-	public static ItemFood cookedkonin = new BasicFood(12, 12F, true, "cookedkonin");
-	public static ItemFood playermeat = new BasicFood(6, 6F, true, "playermeat");
-	public static ItemFood cookedplayermeat = new BasicFood(8, 12F, true, "cookedplayermeat");
+
 	
-	public static Item stonehand = new Stonehand("stonehand",64);
-	public static Item clumpclay = new BasicItem("clumpclay",64);
-	public static Item mossitem = new BasicItem("mossitem",64);
-	public static Item turf = new BasicItem("turf",64);
-	public static Item rope = new Rope("rope",64);
-	public static Item salt = new BasicItem("salt",64);
-	public static ItemFood pumpkinnugget = new BasicFood(2, 1.2F, false, "pumpkinnugget");
-	public static Item wetvineitem = new WetVineItem("wetvineitem",64);
-	public static Item dryvineitem = new BasicItem("dryvineitem",64);
-	public static Item spoke = new BasicItem("spoke",64);
-	public static Item spokes = new BasicDamageItem("spokes",1,64);
-	public static Item pointedstone = new PointedStone("pointedstone",ToolMaterial.IRON, 64);
+	public static final Item stonehand = new Stonehand("stonehand",64);
+	public static final Item clumpclay = new BasicItem("clumpclay",64);
+	public static final Item mossitem = new BasicItem("mossitem",64);
+	public static final Item turf = new BasicItem("turf",64);
+	public static final Item rope = new Rope("rope",64);
+	public static final Item salt = new BasicItem("salt",64);
+
+	public static final Item wetvineitem = new WetVineItem("wetvineitem",64);
+	public static final Item dryvineitem = new BasicItem("dryvineitem",64);
+	public static final Item spoke = new BasicItem("spoke",64);
+	public static final Item spokes = new BasicDamageItem("spokes",1,64);
+	public static final Item pointedstone = new PointedStone("pointedstone",ToolMaterial.IRON, 64);
 	
 	
-	public static Item acorn = new BasicItem("acorn",64);
+	public static final Item acorn = new BasicItem("acorn",64);
 
 	
 //	public static Item stonepickaxe = new RealismPickaxe("stonepickaxe",Realism.StoneMaterial);
@@ -92,15 +92,19 @@ public class RegItems {
 	
 	
 	//Семена для саженцев
-	//public static Item appleseed = new SeedOakSapling("appleseed");
+
 	//Саженцы которые уставливают саженец
-//	public static Item oaksapling = new OakSapling("oaksapling",64);
+	public static final Item itemapplesapling = new ItemAppleSapling("itemapplesapling",64, Blocks.DIRT, RegBlocks.appletreeone);
+	public static final Item itemappleseeds = new ItemTreeSeeds("itemappleseeds", RegBlocks.blockappleseed);
+	
+	
+	
 //	public static Item birchsapling = new BirchSapling("birchsapling",64);
 //	public static Item sprucesapling = new SpruceSapling("sprucesapling",64);
 	
-	public static Item thermo = new Thermometr("thermo",1);
+	public static final Item thermo = new Thermometr("thermo",1);
 	
-	public static Item oreitemiron = new BasicItem("oreitemiron",64),
+	public static final Item oreitemiron = new BasicItem("oreitemiron",64),
 			   oreitemgold = new BasicItem("oreitemgold",64),
 			   oreitemcopper = new BasicItem("oreitemcopper",64),
 			   oreitemdiamond = new BasicItem("oreitemdiamond",64);
@@ -125,9 +129,9 @@ public class RegItems {
 		registerItem(calendar);
 		
 		// MP's register
-//		registerItem(appleseed);
+		registerItem(itemappleseeds);
 		registerItem(itemfallen);
-		
+		registerItem(itemapplesapling);
 		registerItem(wood_shovel);
 		registerItem(stone_shovel);
 		registerItem(wood_pickaxe);
@@ -137,10 +141,7 @@ public class RegItems {
 		registerItem(thermo);
 		
 		registerItem(counter);
-		registerItem(cookedplayermeat);
-		registerItem(playermeat);
-		registerItem(cookedkonin);
-		registerItem(konin);
+
 	//	registerItem(birchsapling);
 	//	registerItem(diamondpickaxe);
 	//	registerItem(goldpickaxe);
@@ -173,10 +174,10 @@ public class RegItems {
 		registerItem(rope);
 		registerItem(salt);
 		registerItem(bladestoneshovel);
-		registerItem(pumpkinnugget);
+	
 		registerItem(mossitem);
 	//	registerItem(newstoneaxe);
-		registerItem(bladestoneaxe);
+		registerItem(BLADE_STONE_AXE);
 		registerItem(turf);
 		registerItem(dirtformaxe);
 		registerItem(dirtformshovel);
@@ -195,18 +196,16 @@ public class RegItems {
 	}
 	public static void registerRender() {
 		registerRenderItem(calendar);
-		
+		registerRenderItem(itemapplesapling);
+		registerRenderItem(itemappleseeds);
 		registerRenderItem(itemfallen);
 		registerRenderItem(thermo);
 		registerRenderItem(backpack);
 		registerRenderItem(counter);
-		registerRenderItem(cookedplayermeat);
-		registerRenderItem(playermeat);
-		registerRenderItem(cookedkonin);
-		registerRenderItem(konin);
+
 	//	registerRenderItem(birchsapling);
 	//	registerRenderItem(branchbirchitem);
-///		registerRenderItem(appleseed);
+		
 		
 		registerRenderItem(oreitemiron);
 		registerRenderItem(oreitemgold);
@@ -244,10 +243,10 @@ public class RegItems {
 		registerRenderItem(stonebladechisel);
 		registerRenderItem(salt);
 		registerRenderItem(bladestoneshovel);
-		registerRenderItem(pumpkinnugget);
+	
 		
 		registerRenderItem(rope);
-		registerRenderItem(bladestoneaxe);
+		registerRenderItem(BLADE_STONE_AXE);
 	//	registerRenderItem(newstoneaxe);
 		registerRenderItem(mossitem);
 		registerRenderItem(spokes);

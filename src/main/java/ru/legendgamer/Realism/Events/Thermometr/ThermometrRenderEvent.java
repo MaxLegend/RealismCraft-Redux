@@ -28,10 +28,10 @@ public class ThermometrRenderEvent {
 	static Minecraft mc = Minecraft.getMinecraft();
 	
 
-
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void thermoRender(RenderGameOverlayEvent.Post event) {
-		World world = FMLCommonHandler.instance().getMinecraftServerInstance().getServer().getEntityWorld();
+		World world = mc.world;
 		IPlayerCap cap = Minecraft.getMinecraft().player.getCapability(PlayerCapProvider.LEVEL_CAP, null);
 		
 		if(Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() == RegItems.thermo || Minecraft.getMinecraft().player.getHeldItemOffhand().getItem() == RegItems.thermo) {

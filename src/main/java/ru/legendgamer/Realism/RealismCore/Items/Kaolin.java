@@ -1,6 +1,6 @@
 package ru.legendgamer.Realism.RealismCore.Items;
 
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicItem;
+import ru.legendgamer.Realism.API.BasicItem.BasicItem;
 
 public class Kaolin extends BasicItem{
 

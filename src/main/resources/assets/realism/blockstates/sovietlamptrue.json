@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east":  { "model": "realism:sovietlamp"},
+        "facing=west":  { "model": "realism:sovietlamp"},
+        "facing=south": { "model": "realism:sovietlamp", "y": 90 },
+        "facing=north": { "model": "realism:sovietlamp", "y": 90 }
+    }
+}

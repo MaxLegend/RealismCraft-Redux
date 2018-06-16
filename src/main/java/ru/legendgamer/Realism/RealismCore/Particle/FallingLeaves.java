@@ -37,7 +37,7 @@ public class FallingLeaves extends Particle {
 		
 		this.setRBGColorF((float)R/255, (float)G/255, (float)B/255);
 
-	
+		
 		TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(PARTICLE_TEXTURE.toString());
 		setParticleTexture(sprite);    
 	}   

@@ -2,7 +2,7 @@ package ru.legendgamer.Realism.RealismCore.Blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockFalling;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockFalling;
 
 public class FallingDirt extends BasicBlockFalling{
 

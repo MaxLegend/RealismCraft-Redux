@@ -7,7 +7,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicItem;
+import ru.legendgamer.Realism.API.BasicItem.BasicItem;
 
 public class Thermometr extends BasicItem{
 

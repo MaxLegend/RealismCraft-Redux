@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import ru.legendgamer.Realism.Capability.PlayerCAP.IPlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCap;
 import ru.legendgamer.Realism.Capability.PlayerCAP.PlayerCapStorage;
@@ -24,18 +25,21 @@ import ru.legendgamer.Realism.PacketSystem.NetworkHandler;
 import ru.legendgamer.Realism.RealismCore.GuiHandler;
 import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
+import ru.legendgamer.Realism.RealismCore.RegFoods;
 import ru.legendgamer.Realism.RealismCore.RegItems;
+import ru.legendgamer.Realism.WorldGen.WorldGenHui;
 
 public class CommonProxy {
 
-
+	public static WorldGenHui wgo = new WorldGenHui();
     public void preInit(FMLPreInitializationEvent event)
     {
     	ConfigManager.register(event);
-    
-    	RegBlocks.register();
+    	
     	RegItems.register();
-    //	RegEntity.register();
+    	RegFoods.register();
+    	RegBlocks.register();
+
     	
     	new RegEvents.Server();
     	CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
@@ -46,7 +50,7 @@ public class CommonProxy {
     }
     public void init(FMLInitializationEvent event)
     {
-    	
+    	//  	GameRegistry.registerWorldGenerator(wgo, 0);
     	CapabilityEventHandler.register();
     	NetworkRegistry.INSTANCE.registerGuiHandler(Realism.INSTANCE, new GuiHandler());
     }

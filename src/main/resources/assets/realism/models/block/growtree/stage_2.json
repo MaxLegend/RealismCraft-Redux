@@ -1,0 +1,24 @@
+{
+"parent": "block/cube_all",
+	"__comment": "Designed by Pavel Durov with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "realism:blocks/oakside",
+		"texture": "realism:blocks/oakside",
+		"texturetop": "realism:blocks/oaktop"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 4, 0, 4 ],
+			"to": [ 12, 16, 12 ],
+			"faces": {
+				"down": { "uv": [ 4, 4, 12, 12 ], "texture": "#texturetop" },
+				"up": { "uv": [ 4, 4, 12, 12 ], "texture": "#texturetop" },
+				"north": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"south": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"west": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" },
+				"east": { "uv": [ 4, 0, 12, 16 ], "texture": "#texture" }
+			}
+		}
+	]
+}

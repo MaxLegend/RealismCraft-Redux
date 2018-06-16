@@ -1,7 +1,14 @@
 {
-   "isheavybreathing": {
+   "buzzlump": {
+       "category": "blocks",
        "sounds": [
-           "realism:isheavybreathing"
+           "realism:buzzlump"
+       ]
+   },
+   "enablelump": {
+       "category": "blocks",
+       "sounds": [
+           "realism:enablelump"
        ]
    }
 }

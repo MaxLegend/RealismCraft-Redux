@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.API.TimerForCoord;
+import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithCustomModel;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicBlock.BasicBlockWithCustomModel;
 
 public class AppleTreeStageTwo extends BasicBlockWithCustomModel {
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();

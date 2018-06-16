@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import ru.legendgamer.Realism.RealismCore.Basic.BasicItem.BasicItem;
+import ru.legendgamer.Realism.API.BasicItem.BasicItem;
 
 public class Counter extends BasicItem{
 
