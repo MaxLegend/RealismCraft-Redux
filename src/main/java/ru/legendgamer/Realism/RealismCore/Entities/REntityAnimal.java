@@ -70,7 +70,7 @@ public abstract class REntityAnimal extends EntityAgeable implements IAnimals {
     public int getType() {return type;}
     
     /**
-     * Returns true if the animal is tamed
+     * Returns true if the animal is tamed 
      */
     public boolean isTamed() {
     	return isTamed;
