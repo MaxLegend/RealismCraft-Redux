@@ -6,7 +6,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityAnimal;
 import ru.legendgamer.Realism.RealismCore.Entities.REntityAnimal;
 
-public class RAIFollowParent extends EntityAIBase {
+public class RAIFollowParent extends EntityAIBase { 
     REntityAnimal childAnimal;
     REntityAnimal parentAnimal;
     double moveSpeed;
