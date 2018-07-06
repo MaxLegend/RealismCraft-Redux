@@ -104,6 +104,8 @@ public class RAIMate extends EntityAIBase {
 
             if (playerMP != null) {
                 playerMP.addStat(StatList.ANIMALS_BRED);
+		  //На будущее: Здесь я сломал достижения майнкрафта. \0/ Когда будет создана новыя система достижений, создам новый 
+		  //тригер.
 //                CriteriaTriggers.BRED_ANIMALS.trigger(playerMP, animal, targetMate, entity);
             }
 
@@ -114,6 +116,7 @@ public class RAIMate extends EntityAIBase {
             entity.setGrowingAge(-24000);
             entity.setLocationAndAngles(animal.posX, animal.posY, animal.posZ, 0.0F, 0.0F);
             REntityAnimal entity2 = (REntityAnimal)entity;
+	    //Вот здесь нужно добавить принадлежность к полу... Я забыл:) И ещё что-то нужно, но это тоже я забыл:)
             entity2.setType(world.rand.nextBoolean() ? animal.getType() : targetMate.getType());
             world.spawnEntity(entity2);
             Random random = animal.getRNG();
