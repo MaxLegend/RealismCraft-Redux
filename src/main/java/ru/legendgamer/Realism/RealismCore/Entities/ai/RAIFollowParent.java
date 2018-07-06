@@ -31,7 +31,7 @@ public class RAIFollowParent extends EntityAIBase {
 
                     if (d1 <= d0) {
                         d0 = d1;
-                        entity = entity2;
+                        entity = entity2; 
                     }
                 }
             }
