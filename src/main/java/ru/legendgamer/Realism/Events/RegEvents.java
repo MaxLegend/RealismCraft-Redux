@@ -11,6 +11,7 @@ import ru.legendgamer.Realism.Events.SystemWeight.EventWeight;
 import ru.legendgamer.Realism.Events.SystemWeight.PlayerWeight;
 import ru.legendgamer.Realism.Events.Thermometr.ThermometrRenderEvent;
 import ru.legendgamer.Realism.Events.WaterBarEvent.EventDrinkBar;
+import ru.legendgamer.Realism.NewInventory.CAPforINV.reg.CancelVanillaInv;
 import ru.legendgamer.Realism.RealismCore.Particle.ParticleEvent;
 
 public class RegEvents {

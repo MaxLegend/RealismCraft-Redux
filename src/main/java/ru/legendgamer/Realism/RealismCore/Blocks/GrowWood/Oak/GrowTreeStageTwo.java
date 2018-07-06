@@ -72,17 +72,17 @@ public class GrowTreeStageTwo extends BasicBlockWithCustomModel {
 		if(!world.isRemote) {
 			if (time2.time == 20) {
 				if(world.getBlockState(new BlockPos(pos.getX(), pos.getY() - maxHeightTree, pos.getZ())).getBlock() != Blocks.LOG){
-					setBlock(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()),world, RegBlocks.growtreeone.getDefaultState());
+					setBlock(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()),world, RegBlocks.growtreeone_oak.getDefaultState());
 				}
 
 			}
 			if (time2.time == 40) {
-				setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
+				setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
 				if(world.getBlockState(new BlockPos(pos.getX(), pos.getY() - maxHeightLeaves, pos.getZ())).getBlock() == Blocks.LOG){	
-					setBlock(new BlockPos(pos.getX() + 1, pos.getY() + 2, pos.getZ()), world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() - 1, pos.getY() + 2, pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() + 1),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() -1),world, RegBlocks.smallleaves.getDefaultState());
+					setBlock(new BlockPos(pos.getX() + 1, pos.getY() + 2, pos.getZ()), world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() - 1, pos.getY() + 2, pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() + 1),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX(), pos.getY() + 2, pos.getZ() -1),world, RegBlocks.smallleaves_oak.getDefaultState());
 				
 						setBlock(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()),world, RegBlocks.oakbranch.getDefaultState());
 						setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()),world, RegBlocks.oakbranch.getDefaultState());
@@ -91,19 +91,19 @@ public class GrowTreeStageTwo extends BasicBlockWithCustomModel {
 				
 					
 					if(world.rand.nextInt(8) >= 4){
-					setBlock(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() , pos.getY(), pos.getZ() + 1),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() , pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves.getDefaultState());
+					setBlock(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() , pos.getY(), pos.getZ() + 1),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() , pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves_oak.getDefaultState());
 					}
-					setBlock(new BlockPos(pos.getX() + 1 , pos.getY(), pos.getZ() + 1),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() + 1), world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() + 2 , pos.getY(), pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX() - 2, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 2),world, RegBlocks.smallleaves.getDefaultState());
-					setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 2),world, RegBlocks.smallleaves.getDefaultState());
+					setBlock(new BlockPos(pos.getX() + 1 , pos.getY(), pos.getZ() + 1),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ() - 1),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ() + 1), world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() + 2 , pos.getY(), pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX() - 2, pos.getY(), pos.getZ()),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 2),world, RegBlocks.smallleaves_oak.getDefaultState());
+					setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 2),world, RegBlocks.smallleaves_oak.getDefaultState());
 				}
 			}
 			if (time2.time == 80) {

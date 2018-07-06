@@ -59,7 +59,7 @@ public class GrowTreeStageOne extends BasicBlockWithCustomModel {
 		
 		if(!world.isRemote) {
 			if (time2.time == 60) {
-				setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), world, RegBlocks.growtreetwo.getDefaultState());
+				setBlock(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), world, RegBlocks.growtreetwo_oak.getDefaultState());
 			}		
 		}
 	}

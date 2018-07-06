@@ -27,6 +27,7 @@ import ru.legendgamer.Realism.RealismCore.Realism;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
 import ru.legendgamer.Realism.RealismCore.RegFoods;
 import ru.legendgamer.Realism.RealismCore.RegItems;
+import ru.legendgamer.Realism.RealismCore.Blocks.Workbench.WorkbenchTile;
 import ru.legendgamer.Realism.WorldGen.WorldGenHui;
 
 public class CommonProxy {
@@ -39,8 +40,7 @@ public class CommonProxy {
     	RegItems.register();
     	RegFoods.register();
     	RegBlocks.register();
-
-    	
+    	   GameRegistry.registerTileEntity(WorkbenchTile.class, "realism:Workbench");
     	new RegEvents.Server();
     	CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap.class);
     	CapabilityManager.INSTANCE.register(ICAPCustomInventory.class, new CAPCustomInventoryStorage(), CAPCustomInventory.class);

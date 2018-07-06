@@ -6,19 +6,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import ru.legendgamer.Realism.Capability.WorldCAP.DateProvider;
-import ru.legendgamer.Realism.Capability.WorldCAP.IDate;
-import ru.legendgamer.Realism.Events.EventToolMode;
 import ru.legendgamer.Realism.Events.RegEvents;
 import ru.legendgamer.Realism.Events.GameEvents.HandAndNoItemEvent;
 import ru.legendgamer.Realism.RealismCore.Realism;
@@ -26,11 +23,13 @@ import ru.legendgamer.Realism.RealismCore.RegBlocks;
 import ru.legendgamer.Realism.RealismCore.RegFoods;
 import ru.legendgamer.Realism.RealismCore.RegItems;
 import ru.legendgamer.Realism.RealismCore.RegSounds;
+import ru.legendgamer.Realism.RealismCore.Blocks.Workbench.WorkbenchRenderer;
+import ru.legendgamer.Realism.RealismCore.Blocks.Workbench.WorkbenchTile;
 import ru.legendgamer.Realism.RealismCore.Particle.FallingLeaves;
 
 public class ClientProxy extends CommonProxy {
 	public static String KEY_CATEGORY = "key.categories." + Realism.MODID;
-	public static EventToolMode.EnumToolMode currentToolMode = EventToolMode.EnumToolMode.FULL;
+	
 	 
 	@Override
 	public void preInit(FMLPreInitializationEvent event)
@@ -39,7 +38,7 @@ public class ClientProxy extends CommonProxy {
 
 		RegItems.preRegisterRender();
 	
-		 ClientRegistry.registerKeyBinding(EventToolMode.KEY_TOOL_MODE);
+	
 		 ClientRegistry.registerKeyBinding(HandAndNoItemEvent.keyDestroyOffhand);
 		new RegEvents.Client();
 
@@ -52,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 		super.init(event);
 //		RegRenderLayer.register();
 	
-		
+		  ClientRegistry.bindTileEntitySpecialRenderer(WorkbenchTile.class, (TileEntitySpecialRenderer)new WorkbenchRenderer());
 		RegItems.registerRender();
 		RegFoods.registerRender();
 		RegBlocks.registerRender();
@@ -70,10 +69,10 @@ public class ClientProxy extends CommonProxy {
 
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
-				return block.colorMultiplier( RegBlocks.smallleaves.getStateFromMeta(0), (IBlockAccess)null, (BlockPos)null, tintIndex);}
+				return block.colorMultiplier( RegBlocks.smallleaves_oak.getStateFromMeta(0), (IBlockAccess)null, (BlockPos)null, tintIndex);}
 			},
 				RegBlocks.leavesappletree,
-				RegBlocks.smallleaves,
+				RegBlocks.smallleaves_oak,
 				RegBlocks.smallleavesspruce, 
 				RegBlocks.fallenlayers,
 			

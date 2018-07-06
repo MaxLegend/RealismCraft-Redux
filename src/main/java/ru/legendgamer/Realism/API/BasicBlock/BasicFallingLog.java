@@ -197,12 +197,13 @@ public class BasicFallingLog extends BlockRotatedPillar {
 	}
 
 	int lenght(World world, BlockPos pos,int curLen){
-		if(world.getBlockState(pos.up()) == RegBlocks.test_falling_log.getDefaultState())
+		/*if(world.getBlockState(pos.up()) == RegBlocks.test_falling_log.getDefaultState())
 		{	
 
 			return lenght(world, pos.add(0,1,0),curLen + 1); 
 		}
 		else 
+		*/
 		{
 			return curLen;
 		}

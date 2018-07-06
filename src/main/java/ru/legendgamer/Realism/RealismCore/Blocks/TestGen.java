@@ -20,8 +20,8 @@ public class TestGen extends BasicBlock{
 	}
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-    	for(int i = 0; i < 8; i++)
-    	world.setBlockState(new BlockPos(pos.getX(),pos.getY() + i, pos.getZ()), RegBlocks.test_falling_log.getDefaultState());
+    	for(int i = 0; i < 8; i++) {}
+    //	world.setBlockState(new BlockPos(pos.getX(),pos.getY() + i, pos.getZ()), RegBlocks.test_falling_log.getDefaultState());
         return true;
     }
 }

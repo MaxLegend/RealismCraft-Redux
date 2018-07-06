@@ -31,7 +31,7 @@ public class BasicBlockCrops extends BlockBush implements IGrowable {
 	public boolean canUseBonemeal;
 	public static  final PropertyInteger AGE = PropertyInteger.create("age", 0, 4);
 
-	public BasicBlockCrops(String name,Block blockOn,Item crop,Item seed,int valueDrops,int meta,boolean canUseBonemeal)
+	public BasicBlockCrops(String name,Block blockOn,int valueDrops,int meta,boolean canUseBonemeal)
 	{
 		
 		this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), Integer.valueOf(0)));
@@ -42,8 +42,7 @@ public class BasicBlockCrops extends BlockBush implements IGrowable {
 		this.setUnlocalizedName(name);
 		this.setSoundType(SoundType.PLANT);
 		this.disableStats();
-		this.itemCrop = crop;
-		this.itemSeed = seed;
+
 		this.blockOn = blockOn;
 		this.meta = meta;
 		this.canUseBonemeal = canUseBonemeal;
@@ -83,8 +82,11 @@ public class BasicBlockCrops extends BlockBush implements IGrowable {
 		return state.getBlock() == blockOn; 
 	}
 	protected PropertyInteger getAgeProperty() { return AGE; }
-	protected int getAge(IBlockState state) { return ((Integer)state.getValue(this.getAgeProperty())).intValue(); }
+	
+	public int getAge(IBlockState state) { return ((Integer)state.getValue(this.getAgeProperty())).intValue(); }
+	
 	public IBlockState withAge(int age) { return this.getDefaultState().withProperty(this.getAgeProperty(), Integer.valueOf(age)); }
+	
 	public boolean isMaxAge(IBlockState state) { return ((Integer)state.getValue(this.getAgeProperty())).intValue() >= this.getMaxAge(); }
 
 

@@ -1,13 +1,16 @@
-package ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Birch;
+package ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Jungle;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -19,12 +22,12 @@ import ru.legendgamer.Realism.API.TimerForCoord;
 import ru.legendgamer.Realism.API.BasicBlock.BasicBlockWithCustomModel;
 import ru.legendgamer.Realism.RealismCore.RegBlocks;
 
-public class GrowTreeStageOneBirch extends BasicBlockWithCustomModel {
+public class JungleGrowStage2 extends BasicBlockWithCustomModel {
 	List<TimerForCoord> time =  new ArrayList<TimerForCoord>();
 	int maxHeightTree;
 	protected static final AxisAlignedBB treeStageOne_AABB = new AxisAlignedBB(0.3D, 0.0D, 0.3D, 0.7D, 1D, 0.7D);
 
-	public GrowTreeStageOneBirch(Material materialIn, String name, float hardness,float resistanse, String hravLevel, int level, SoundType blockSoundType) {
+	public JungleGrowStage2(Material materialIn, String name, float hardness,float resistanse, String hravLevel, int level, SoundType blockSoundType) {
 		super(materialIn, name, hardness, resistanse, hravLevel, level, blockSoundType);
 	}
 	@Override
@@ -51,10 +54,17 @@ public class GrowTreeStageOneBirch extends BasicBlockWithCustomModel {
 		}
 		if (time2 == null) return;
 		world.scheduleBlockUpdate(pos, this, 1, 0);
-		maxHeightTree = rand.nextInt(11);
+		maxHeightTree = rand.nextInt(30);
 		if(!world.isRemote) {
-			if (time2.time == 60) {			
-						world.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), RegBlocks.growtreetwobirch.getDefaultState());
+			if (time2.time == 60) {
+				if(world.getBlockState(new BlockPos(pos.getX(), pos.getY() - maxHeightTree, pos.getZ())).getBlock() != Blocks.LOG) {
+					world.setBlockState(new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()), RegBlocks.jungle_stage_2.getDefaultState());
+				}
+			}	
+			if (time2.time == 80) {
+				if(world.getBlockState(new BlockPos(pos.getX(), pos.getY() - maxHeightTree, pos.getZ())).getBlock() != Blocks.LOG) {
+				world.setBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), RegBlocks.jungle_stage_3.getDefaultState());
+				}
 			}		
 		}
 	}
@@ -63,5 +73,6 @@ public class GrowTreeStageOneBirch extends BasicBlockWithCustomModel {
 	{
 		return treeStageOne_AABB;
 	}
+
 
 }

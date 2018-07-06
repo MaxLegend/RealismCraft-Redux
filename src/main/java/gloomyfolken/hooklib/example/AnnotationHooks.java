@@ -530,7 +530,7 @@ public class AnnotationHooks {
 
 				return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
 			}
-		}, RegBlocks.leavesappletree,RegBlocks.fallenlayers,RegBlocks.smallleaves,RegBlocks.smallleavesappletree,RegBlocks.smallleavesbirch,RegBlocks.smallleavesspruce,RegBlocks.mossblock);
+		}, RegBlocks.leavesappletree,RegBlocks.fallenlayers,RegBlocks.smallleaves_oak,RegBlocks.smallleavesappletree,RegBlocks.smallleavesbirch,RegBlocks.smallleavesspruce,RegBlocks.mossblock);
 
 
 		blockcolors.registerBlockColorHandler(new IBlockColor()

@@ -6,6 +6,9 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -13,6 +16,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -113,27 +117,17 @@ public class OakBranch extends Block
         return i;
     }
 
-    /**
-     * Gets the localized name of this block. Used for the statistics page.
-     */
-
 
     public boolean isFullCube(IBlockState state)
     {
         return false;
     }
 
-    /**
-     * Determines if an entity can path through this block
-     */
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
     {
         return false;
     }
 
-    /**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
@@ -148,14 +142,6 @@ public class OakBranch extends Block
         return  blockfaceshape == BlockFaceShape.SOLID || flag;
     }
 
-
-
-  
-
-    /**
-     * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
-     * returns the metadata of the dropped item based on the old metadata of the block.
-     */
     public int damageDropped(IBlockState state)
     {
         return 0;
@@ -167,26 +153,16 @@ public class OakBranch extends Block
         return side == EnumFacing.DOWN ? super.shouldSideBeRendered(blockState, blockAccess, pos, side) : true;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState();
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
     public int getMetaFromState(IBlockState state)
     {
         return 0;
     }
 
-    /**
-     * Get the actual Block state of this Block at the given position. This applies properties not visible in the
-     * metadata, such as fence connections.
-     */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
     	boolean flag0 =  canWallConnectTo(worldIn, pos, EnumFacing.DOWN);
@@ -219,18 +195,14 @@ public class OakBranch extends Block
 
     
 
-    @Override
-    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
-    {
-        Block connector = world.getBlockState(pos.offset(facing)).getBlock();
-        return connector instanceof OakBranch || connector instanceof BlockFenceGate;
-    }
 
     private boolean canWallConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
     {
-        BlockPos other = pos.offset(facing);
-        Block block = world.getBlockState(other).getBlock();
-        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+        Block connector = world.getBlockState(pos.offset(facing)).getBlock();
+        IBlockState state_connector = world.getBlockState(pos.offset(facing));
+        if(connector instanceof OakBranch || connector instanceof BlockLeaves || state_connector == Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK)) {
+        return true;
+        } else return false;
     }
 
     

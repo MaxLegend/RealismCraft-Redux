@@ -6,6 +6,9 @@ import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockOldLog;
+import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -13,6 +16,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +25,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ru.legendgamer.Realism.RealismCore.Realism;
+import ru.legendgamer.Realism.RealismCore.RegBlocks;
+import ru.legendgamer.Realism.RealismCore.Blocks.GrowWood.Birch.BirchBranch;
 
 public class BranchAppleTree extends Block
 {
@@ -216,19 +222,13 @@ public class BranchAppleTree extends Block
     }
 
     
-
-    @Override
-    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
-    {
-        Block connector = world.getBlockState(pos.offset(facing)).getBlock();
-        return connector instanceof BranchAppleTree || connector instanceof BlockFenceGate;
-    }
-
     private boolean canWallConnectTo(IBlockAccess world, BlockPos pos, EnumFacing facing)
     {
-        BlockPos other = pos.offset(facing);
-        Block block = world.getBlockState(other).getBlock();
-        return block.canBeConnectedTo(world, other, facing.getOpposite()) || canConnectTo(world, other, facing.getOpposite());
+        Block connector = world.getBlockState(pos.offset(facing)).getBlock();
+        IBlockState state_connector = world.getBlockState(pos.offset(facing));
+        if(connector instanceof BranchAppleTree || connector instanceof BlockLeaves || state_connector == RegBlocks.blockappletree.getDefaultState()) {
+        return true;
+        } else return false;
     }
 
     
