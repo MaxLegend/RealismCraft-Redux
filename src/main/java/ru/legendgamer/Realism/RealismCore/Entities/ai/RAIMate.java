@@ -109,7 +109,7 @@ public class RAIMate extends EntityAIBase {
 //                CriteriaTriggers.BRED_ANIMALS.trigger(playerMP, animal, targetMate, entity);
             }
 
-            animal.setGrowingAge(6000);
+            animal.setGrowingAge(6000); 
             targetMate.setGrowingAge(6000);
             animal.resetInLove();
             targetMate.resetInLove();
